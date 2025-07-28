@@ -23,4 +23,43 @@ export const dataSummary = (arrayOfObjects: Task[]) => {
   return returnObj
 }
 
-console.log(dataSummary(tasklistData));
+export const sortByKeyValue = (arrayOfObjects: Task[], key: keyof Task = 'id') => {
+  const deepCopy = [...arrayOfObjects]
+  return deepCopy.sort((a, b) => {
+    const stringA = a[key];
+    const stringB = b[key];
+    if (stringA < stringB) {
+      return -1;
+    } else if (stringA > stringB) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+export const getIndexSortedArray = (sortedArrayOfObjects: Task[], id: number) => {
+  let first = 0, last = sortedArrayOfObjects.length - 1;
+  let mid;
+  while (first <= last) {
+    mid = Math.floor((first + last) / 2);
+    if (sortedArrayOfObjects[mid].id === id) {
+      return mid;
+    }
+    if (sortedArrayOfObjects[mid].id < id) {
+      first = mid + 1;
+    } else {
+      last = mid - 1;
+    }
+  }
+  return -1;
+}
+
+export const getIndex = (unsortedArrayOfObjects: Task[], id: number) => {
+  for (let i = 0; i < unsortedArrayOfObjects.length; i++) {
+    if (unsortedArrayOfObjects[i].id === id) {
+      return i;
+    }
+  }
+  return -1;
+}
