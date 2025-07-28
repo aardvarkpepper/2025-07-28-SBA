@@ -1,19 +1,26 @@
-// Your original array literal
-const myArray = ["one", "two", "three"] as const;
+import { tasklistData } from '../data/tasklistData.ts';
+import type { Task } from '../types/index';
 
-// The type of 'myArray' will be inferred as a readonly tuple:
-// type MyArrayType = readonly ["one", "two", "three"]
-type MyArrayType = typeof myArray;
+export const dataSummary = (arrayOfObjects: Task[]) => {
+  const statusMap = new Set(["Pending", "In Progress", "Completed"]);
+  const priorityMap = new Set(["Low", "Medium", "High"]);
+  const returnObj = {
+    id: 0,
+    status: statusMap,
+    priority: priorityMap,
+  }
+  for (let i = 0; i < arrayOfObjects.length; i++) {
+    if (arrayOfObjects[i].id >= returnObj.id) {
+      returnObj.id = arrayOfObjects[i].id + 1; // new IDs are assigned from returnObj.id;
+    }
+    if (!statusMap.has(arrayOfObjects[i].status)) {
+      statusMap.add(arrayOfObjects[i].status);
+    }
+    if (!priorityMap.has(arrayOfObjects[i].priority)) {
+      priorityMap.add(arrayOfObjects[i].priority);
+    }
+  }
+  return returnObj
+}
 
-// You can also extract a union type of the elements:
-// type MyElements = "one" | "two" | "three"
-type MyElements = MyArrayType[number];
-
-console.log("myArray:", myArray);
-// console.log("MyArrayType:", MyArrayType); // Types cannot be logged at runtime
-// console.log("MyElements:", MyElements);   // Types cannot be logged at runtime
-
-// If you try to push to a 'readonly' array, TypeScript will give a compile-time error:
-// myArray.push("four"); // Error: Property 'push' does not exist on type 'readonly ["one", "two", "three"]'.
-
-const hamster: MyArrayType = ["one", "two", "three"];
+console.log(dataSummary(tasklistData));

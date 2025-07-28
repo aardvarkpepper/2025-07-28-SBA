@@ -1,0 +1,51 @@
+import type { Task } from '../types/index';
+export const tasklistData: Task[] = [
+  {
+    id: 1,
+    title: 'Charlie',
+    description: 'Juliet',
+    status: 'Pending',
+    priority: 'High',
+    dueDate: '2025-07-01',
+  },
+    {
+    id: 2,
+    title: 'Bravo Duplicate',
+    description: 'Kilo Duplicate',
+    status: 'Custom Status',
+    priority: 'Low',
+    dueDate: '2025-07-01',
+  },
+    {
+    id: 3,
+    title: 'Alpha',
+    description: 'India',
+    status: 'Completed',
+    priority: 'Medium',
+    dueDate: '2026-12-30',
+  },
+    {
+    id: 4,
+    title: 'Foxtrot',
+    description: 'Kilo Duplicate',
+    status: 'In Progress',
+    priority: 'High',
+    dueDate: '2026-12-29',
+  },
+    {
+    id: 5,
+    title: 'Bravo Duplicate',
+    description: 'Hotel',
+    status: 'Pending',
+    priority: 'Custom Priority',
+    dueDate: '2025-02-12',
+  },
+    {
+    id: 6,
+    title: 'Echo',
+    description: 'Golf',
+    status: 'Completed',
+    priority: 'Medium',
+    dueDate: '2025-01-14',
+  },
+]

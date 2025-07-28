@@ -12,12 +12,15 @@ function App() {
    * Navbar:  Add task button, sort by property
    * List filters, add filters, search function.
    * (Search function iterates through array, looking to see if search term is "includes" in title or description).  Can do "split" to separate into array, and search for multiple strings.  Alternately can accept quotation marks for exact match including space e.g. 'bell bottom' will not find bell or bottom, but only 'bell bottom'
+   *  When form submit is pressed, form disappears, message appears "Form submitted successfully" or some such.
    * 
    * Pregen tasks.
    * 
    * Tasklist, Task.  Use the filters as mentioned.
+
    * 
    * Form with validation.  When I make a new form, assign unique ID, and check dates(limit 10 years)
+   * So include an area for output.
    * Error handling
    * user-friendly feedback
    * 
