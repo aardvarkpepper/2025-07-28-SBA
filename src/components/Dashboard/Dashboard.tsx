@@ -12,7 +12,9 @@ export const Dashboard = () => {
     <div>
       <div>
         <button>Add Task</button>
-        <select>Sort By: All</select>
+        <select>
+          <option>Sort By: All</option>
+        </select>
       </div>
       <div>
         <select>Add Filter By:  None</select>

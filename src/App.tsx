@@ -52,7 +52,7 @@ function App() {
 
   const [tasklist, setTasklist] = useState(tasklistData);
   const tasklistSummary = dataSummary(tasklistData);
-  console.log(`App ${JSON.stringify(tasklistSummary)}`)
+  console.log(`App tasklistSummary ${JSON.stringify(tasklistSummary)}`)
 
   const handleDropdownChange = (taskId: number, keyValue: string, newValue: string) => {
     setTasklist(prev => {

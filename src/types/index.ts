@@ -16,7 +16,7 @@ export type dataSummaryType = [
 ]
 export interface DropdownProps {
   task: Task;
-  tasklistSummary: {id: number, priority: string[], status: string[]}
+  tasklistSummary: dataSummaryType
   name: keyof Task;
   onDropdownChange: (taskId: number, keyValue: string, newValue: string) => void
 }
@@ -28,13 +28,13 @@ export interface DropdownProps {
 // }
 export interface TaskItemProps {
   task: Task;
-  tasklistSummary: {id: number, priority: string[], status: string[]}
+  tasklistSummary: dataSummaryType
   onDropdownChange: (taskId: number, name: string, newValue: string) => void;
   onDelete: (taskId: number) => void;
 }
 export interface TaskListProps {
   tasks: Task[];
-  tasklistSummary: {id: number, priority: string[], status: string[]}
+  tasklistSummary: dataSummaryType
   onDropdownChange: (taskId: number, name: string, newValue: string) => void;
   onDelete: (taskId: number) => void;
 }
