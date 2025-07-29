@@ -63,11 +63,11 @@ function App() {
   const [tasklist, setTasklist] = useState(tasklistData);
   const tasklistSummary = dataSummary(tasklistData);
 
-  const handleDropdownChange = (taskId: number, keyValue: keyof Task, newValue: string) => {
+  const handleDropdownChange = (taskId: number, keyValue: string, newValue: string) => {
     setTasklist(prev => {
       const deepCopy = [];
       for (const each of prev) {
-        if (each.id !== taskId) {
+        if (each.taskId !== taskId) {
           deepCopy.push(each);
         } else {
           const deepCopy2 = JSON.parse(JSON.stringify(each));
@@ -80,20 +80,21 @@ function App() {
   }; // handleDropdownChange
 
   const handleDelete = (taskId: number) => {
-    //console.log('core handleDelete triggered');
     const indexToDelete = getIndex(tasklist, taskId);
-    setTasklist(prev => prev.slice(0, indexToDelete).concat(prev.slice(indexToDelete + 1)));
+    console.log(`handleDelete, ${taskId}, ${indexToDelete}`);
+    setTasklist((prev) => (prev.slice(0, indexToDelete).concat(prev.slice(indexToDelete + 1))));
   }
 
-  tasks, tasklistSummary, onDropdownChange, onDelete
+  //tasks, tasklistSummary, onDropdownChange, onDelete
+  console.log(`App tasks: ${JSON.stringify(tasklist)}`);
 
   return (
 
     <div>
-      <TaskList tasks={tasklistSummary} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDelete={handleDelete} />
+      <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDelete={handleDelete} />
     </div>
 
   )
 }
 
-export default App
+export default App;

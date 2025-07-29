@@ -23,13 +23,11 @@ import { Dropdown } from '../Inputs/Dropdown';
 export const TaskItem = ({ task, tasklistSummary, onDropdownChange, onDelete }: TaskItemProps) => {
   return (
     <div>
-      <div>{task.title}</div>
+      <h2>{task.title}</h2>
       <div>{task.description}</div>
       <Dropdown taskId={task.taskId} tasklistSummary={tasklistSummary} name='priority' onDropdownChange={onDropdownChange} />
       <Dropdown taskId={task.taskId} tasklistSummary={tasklistSummary} name='status' onDropdownChange={onDropdownChange} />
-      <button onChange={(event) => {onDelete(task.taskId)}}>Delete</button>
-
-
+      <button onClick={() => onDelete(task.taskId)}>Delete</button>
     </div>
   )
 }
