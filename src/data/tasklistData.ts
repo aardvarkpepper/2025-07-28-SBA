@@ -1,7 +1,7 @@
 import type { Task } from '../types/index';
 export const tasklistData: Task[] = [
   {
-    id: 1,
+    taskId: 1,
     title: 'Charlie',
     description: 'Juliet',
     status: 'Pending',
@@ -9,7 +9,7 @@ export const tasklistData: Task[] = [
     dueDate: '2025-07-01',
   },
     {
-    id: 2,
+    taskId: 2,
     title: 'Bravo Duplicate',
     description: 'Kilo Duplicate',
     status: 'Custom Status',
@@ -17,7 +17,7 @@ export const tasklistData: Task[] = [
     dueDate: '2025-07-01',
   },
     {
-    id: 3,
+    taskId: 3,
     title: 'Alpha',
     description: 'India',
     status: 'Completed',
@@ -25,7 +25,7 @@ export const tasklistData: Task[] = [
     dueDate: '2026-12-30',
   },
     {
-    id: 4,
+    taskId: 4,
     title: 'Foxtrot',
     description: 'Kilo Duplicate',
     status: 'In Progress',
@@ -33,7 +33,7 @@ export const tasklistData: Task[] = [
     dueDate: '2026-12-29',
   },
     {
-    id: 5,
+    taskId: 5,
     title: 'Bravo Duplicate',
     description: 'Hotel',
     status: 'Pending',
@@ -41,7 +41,7 @@ export const tasklistData: Task[] = [
     dueDate: '2025-02-12',
   },
     {
-    id: 6,
+    taskId: 6,
     title: 'Echo',
     description: 'Golf',
     status: 'Completed',

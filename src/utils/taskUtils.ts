@@ -2,32 +2,66 @@ import { tasklistData } from '../data/tasklistData.ts';
 import type { Task } from '../types/index';
 
 export const dataSummary = (arrayOfObjects: Task[]) => {
-  const statusMap = new Set(["Pending", "In Progress", "Completed"]);
-  const priorityMap = new Set(["Low", "Medium", "High"]);
+  const statusArray = ["Pending", "In Progress", "Completed"];
+  const priorityArray = ["Low", "Medium", "High"];
   const returnObj = {
     id: 0,
-    status: statusMap,
-    priority: priorityMap,
+    status: statusArray,
+    priority: priorityArray,
   }
   for (let i = 0; i < arrayOfObjects.length; i++) {
-    if (arrayOfObjects[i].id >= returnObj.id) {
-      returnObj.id = arrayOfObjects[i].id + 1; // new IDs are assigned from returnObj.id;
+    if (arrayOfObjects[i].taskId >= returnObj.id) {
+      returnObj.id = arrayOfObjects[i].taskId + 1; // new IDs are assigned from returnObj.id;
     }
-    if (!statusMap.has(arrayOfObjects[i].status)) {
-      statusMap.add(arrayOfObjects[i].status);
+    if (!statusArray.includes(arrayOfObjects[i].status)) {
+      statusArray.push(arrayOfObjects[i].status);
     }
-    if (!priorityMap.has(arrayOfObjects[i].priority)) {
-      priorityMap.add(arrayOfObjects[i].priority);
+    if (!priorityArray.includes(arrayOfObjects[i].priority)) {
+      priorityArray.push(arrayOfObjects[i].priority);
     }
   }
-  return returnObj
+  return returnObj;
 }
 
-export const sortByKeyValue = (arrayOfObjects: Task[], key: keyof Task = 'id') => {
+//console.log(dataSummary(tasklistData));
+
+export const getIndex = (unsortedArrayOfObjects: Task[], taskId: number) => {
+  for (let i = 0; i < unsortedArrayOfObjects.length; i++) {
+    if (unsortedArrayOfObjects[i].taskId === taskId) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+export const getIndexSortedArray = (sortedArrayOfObjects: Task[], taskId: number) => {
+  let first = 0, last = sortedArrayOfObjects.length - 1;
+  let mid;
+  while (first <= last) {
+    mid = Math.floor((first + last) / 2);
+    //console.log(sortedArrayOfObjects);
+    if (sortedArrayOfObjects[mid].taskId === taskId) {
+      return mid;
+    }
+    if (sortedArrayOfObjects[mid].taskId < taskId) {
+      first = mid + 1;
+    } else {
+      last = mid - 1;
+    }
+  }
+  return -1;
+}
+
+// console.log(getIndexSortedArray(tasklistData, 1)); // 0
+// console.log(getIndexSortedArray(tasklistData, 2)); // 1
+// console.log(getIndexSortedArray(tasklistData, 3)); // 2
+// console.log(getIndexSortedArray(tasklistData, 17)); // -1
+
+export const sortByKeyValue = (arrayOfObjects: Task[], key: string = 'id') => {
   const deepCopy = [...arrayOfObjects]
   return deepCopy.sort((a, b) => {
-    const stringA = a[key];
-    const stringB = b[key];
+    const stringA = (a as any)[key];
+    const stringB = (b as any)[key];
     if (stringA < stringB) {
       return -1;
     } else if (stringA > stringB) {
@@ -38,28 +72,6 @@ export const sortByKeyValue = (arrayOfObjects: Task[], key: keyof Task = 'id') =
   });
 }
 
-export const getIndexSortedArray = (sortedArrayOfObjects: Task[], id: number) => {
-  let first = 0, last = sortedArrayOfObjects.length - 1;
-  let mid;
-  while (first <= last) {
-    mid = Math.floor((first + last) / 2);
-    if (sortedArrayOfObjects[mid].id === id) {
-      return mid;
-    }
-    if (sortedArrayOfObjects[mid].id < id) {
-      first = mid + 1;
-    } else {
-      last = mid - 1;
-    }
-  }
-  return -1;
-}
-
-export const getIndex = (unsortedArrayOfObjects: Task[], id: number) => {
-  for (let i = 0; i < unsortedArrayOfObjects.length; i++) {
-    if (unsortedArrayOfObjects[i].id === id) {
-      return i;
-    }
-  }
-  return -1;
-}
+// console.log(sortByKeyValue(tasklistData, 'dueDate'));
+// console.log('=========');
+// console.log(sortByKeyValue(tasklistData, 'priority'));
