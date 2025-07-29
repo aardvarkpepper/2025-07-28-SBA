@@ -1,3 +1,9 @@
+export interface DashboardProps {
+  tasklistSummary: DataSummaryType;
+  tasks: Task[];
+  onSortSelect: (sortSelected: keyof Task) => void;
+}
+
 export type DataSummaryType = [
   {
     status: string[],
@@ -5,17 +11,18 @@ export type DataSummaryType = [
   },
   number
 ]
+
 export interface DropdownProps {
   task: Task;
-  tasklistSummary: DataSummaryType
+  tasklistSummary: DataSummaryType;
   name: keyof Task;
-  onDropdownChange: (taskId: number, keyValue: string, newValue: string) => void
+  onDropdownChange: (taskId: number, keyValue: string, newValue: string) => void;
 }
 
 export type Filter = {
   filterId: number;
   name: keyof Task,
-  value: string
+  value: string,
 }
 // export interface TaskFilterProps {
 //   onFilterChange: (filters: {
@@ -31,15 +38,26 @@ export interface Task {
   priority: string;
   dueDate: string;
 }
+
+export interface TaskFormProps {
+  tasklistSummary: DataSummaryType;
+  task: Task;
+  newTask: boolean;
+  onSubmitShowForm: () => void;
+}
+export interface TaskFormContainerProps {
+  tasklistSummary: DataSummaryType;
+  taskOrNull: Task | null;
+}
 export interface TaskItemProps {
   task: Task;
-  tasklistSummary: DataSummaryType
+  tasklistSummary: DataSummaryType;
   onDropdownChange: (taskId: number, name: string, newValue: string) => void;
-  onDelete: (taskId: number) => void;
+  onDeleteTask: (taskId: number) => void;
 }
 export interface TaskListProps {
   tasks: Task[];
-  tasklistSummary: DataSummaryType
+  tasklistSummary: DataSummaryType;
   onDropdownChange: (taskId: number, name: string, newValue: string) => void;
-  onDelete: (taskId: number) => void;
+  onDeleteTask: (taskId: number) => void;
 }

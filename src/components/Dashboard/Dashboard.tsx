@@ -1,5 +1,7 @@
   import { useState } from 'react';
+  import type { DashboardProps, Task } from '../../types/index';
   import { capitalizeFirstLetters } from '../../utils/taskUtils';
+  import { TaskFormContainer } from '../TaskForm/TaskFormContainer';
   
   //  * Navbar:  Add task button, sort by property pulldown
   //  * Add filters by pulldown, changes state of applied filters.  On selection, either a textbox appears, or a pulldown.
@@ -7,15 +9,16 @@
   //  *  When form submit is pressed, form disappears, message appears "Form submitted successfully" or some such.
   // Note:  Styling counts for nothing.
 
-export const Dashboard = () => {
-  const [showForm, setShowForm] = useState(false);
+export const Dashboard = ({tasklistSummary, tasks, onSortSelect}: DashboardProps) => {
+
   return (
     <div>
       <div>
-        <button>Add Task</button>
-        <select>
-          <option>Sort By: All</option>
+        <TaskFormContainer tasklistSummary={tasklistSummary} taskOrNull={null} />
+        <select onChange={(event) => onSortSelect(event.target.value as keyof Task)}>
+          {Object.keys(tasks[0])?.map(taskKey => <option key = {taskKey} value={taskKey}>{`Sort By: ${capitalizeFirstLetters(taskKey)}`}</option>)}
         </select>
+        <div></div>
       </div>
       <div>
         <select>Add Filter By:  None</select>

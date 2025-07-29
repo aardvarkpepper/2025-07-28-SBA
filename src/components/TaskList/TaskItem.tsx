@@ -23,8 +23,9 @@ import { Dropdown } from '../Inputs/Dropdown';
 export const TaskItem = ({ task, tasklistSummary, onDropdownChange, onDeleteTask }: TaskItemProps) => {
   return (
     <div>
-      <h2>{task.title}</h2>
-      <div>{task.description}</div>
+      <h2>TITLE: {task.title}, ID {task.taskId}</h2>
+      <div>DESCRIPTION: {task.description}</div>
+      <div>DUE DATE: {task.dueDate}</div>
       <Dropdown task={task} tasklistSummary={tasklistSummary} name='priority' onDropdownChange={onDropdownChange} />
       <Dropdown task={task} tasklistSummary={tasklistSummary} name='status' onDropdownChange={onDropdownChange} />
       <button onClick={() => onDeleteTask(task.taskId)}>Delete</button>

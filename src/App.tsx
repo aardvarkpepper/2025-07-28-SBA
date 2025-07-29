@@ -27,11 +27,6 @@ function App() {
    * Tasklist, Task.  Use the filters as mentioned.
 
    * 
-   * Form with validation.  When I make a new form, assign unique ID, and check dates(limit 10 years)
-   * So include an area for output.
-   * Error handling
-   * user-friendly feedback
-   * 
    * When I set state of tasklist, look through status and priority and assign unique values to the object
    * {status: Set, priority: Set} (just pop them in there), then use that object to populate dropdown. 
    * 
@@ -118,7 +113,12 @@ function App() {
    * 
    * Dashboard:
    * 
-   * tasklistSummary, filterLastIndex, handleAddTask, handleEditTask, handleAddFilter, handleDeleteFilter, handleSortTasksByArgument
+   * tasklistSummary, filterLastIndex, handleAddTask, handleAddFilter, handleDeleteFilter, handleSortTasksByArgument
+   * 
+   * handleEditTask should go to TASKLIST/TASK
+   * 
+   * Above Taskform is a 
+   * TaskForm takes props:  task (or none), 
    * 
    * Button sets local STATE to display form or not
    * 
@@ -146,6 +146,7 @@ function App() {
   return (
 
     <div>
+      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} />
       <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} />
     </div>
 
