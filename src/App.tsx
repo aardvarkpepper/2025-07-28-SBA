@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-
 import type { Task } from './types/index.ts';
 import { tasklistData } from './data/tasklistData.ts';
 import { dataSummary, getIndex } from './utils/taskUtils.ts';
-
 import { TaskList } from './components/TaskList/TaskList';
+import { Dashboard } from './components/Dashboard/Dashboard';
 
 function App() {
 
@@ -41,27 +40,19 @@ function App() {
    * What about exclusive / inclusive filtering?  Ah . . . ugh.
    * Just keep it simple.
    * 
-   * id: string;
+   * id: number;
      title: string;
      description: string;
      status: TaskStatus;
      priority: PriorityStatus;
      dueDate: string;
 
-     export interface TaskListProps {
-       tasks: Task[];
-       onStatusChange: (taskId: string, keyValue: keyof Task, newValue: string) => void;
-       onPriorityChange: (taskId: string, keyValue: keyof Task, newValue: string) => void;
-       // onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
-       // onPriorityChange: (taskId: string, newPriority: PriorityStatus) => void;
-       onDelete: (taskId: string) => void;
-     }
-     
 
    */
 
   const [tasklist, setTasklist] = useState(tasklistData);
   const tasklistSummary = dataSummary(tasklistData);
+  console.log(`App ${JSON.stringify(tasklistSummary)}`)
 
   const handleDropdownChange = (taskId: number, keyValue: string, newValue: string) => {
     setTasklist(prev => {
@@ -81,12 +72,8 @@ function App() {
 
   const handleDelete = (taskId: number) => {
     const indexToDelete = getIndex(tasklist, taskId);
-    console.log(`handleDelete, ${taskId}, ${indexToDelete}`);
     setTasklist((prev) => (prev.slice(0, indexToDelete).concat(prev.slice(indexToDelete + 1))));
   }
-
-  //tasks, tasklistSummary, onDropdownChange, onDelete
-  console.log(`App tasks: ${JSON.stringify(tasklist)}`);
 
   return (
 

@@ -6,8 +6,16 @@ export interface Task {
   priority: string;
   dueDate: string;
 }
+
+export type dataSummaryType = [
+  {
+    status: string[],
+    priority: string[],
+  },
+  number
+]
 export interface DropdownProps {
-  taskId: number;
+  task: Task;
   tasklistSummary: {id: number, priority: string[], status: string[]}
   name: keyof Task;
   onDropdownChange: (taskId: number, keyValue: string, newValue: string) => void

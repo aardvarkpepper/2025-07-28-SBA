@@ -1,17 +1,19 @@
 import { tasklistData } from '../data/tasklistData.ts';
-import type { Task } from '../types/index';
+import type { dataSummaryType, Task } from '../types/index';
 
 export const dataSummary = (arrayOfObjects: Task[]) => {
   const statusArray = ["Pending", "In Progress", "Completed"];
   const priorityArray = ["Low", "Medium", "High"];
-  const returnObj = {
-    id: 0,
-    status: statusArray,
-    priority: priorityArray,
-  }
+  const returnArray : dataSummaryType = [
+    {
+      status: statusArray,
+      priority: priorityArray,
+    },
+    0
+  ]
   for (let i = 0; i < arrayOfObjects.length; i++) {
-    if (arrayOfObjects[i].taskId >= returnObj.id) {
-      returnObj.id = arrayOfObjects[i].taskId + 1; // new IDs are assigned from returnObj.id;
+    if (arrayOfObjects[i].taskId >= (returnArray[1])) {
+      returnArray[1] = arrayOfObjects[i].taskId + 1; // new IDs are assigned from returnArray[1]
     }
     if (!statusArray.includes(arrayOfObjects[i].status)) {
       statusArray.push(arrayOfObjects[i].status);
@@ -20,7 +22,7 @@ export const dataSummary = (arrayOfObjects: Task[]) => {
       priorityArray.push(arrayOfObjects[i].priority);
     }
   }
-  return returnObj;
+  return returnArray;
 }
 
 //console.log(dataSummary(tasklistData));
