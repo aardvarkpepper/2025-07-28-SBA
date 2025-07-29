@@ -1,10 +1,10 @@
-import { tasklistData } from '../data/tasklistData.ts';
-import type { dataSummaryType, Task } from '../types/index';
+import { tasklistData, filterlistData } from '../data/tasklistData.ts';
+import type { DataSummaryType, Filter, Task } from '../types/index';
 
 export const dataSummary = (arrayOfObjects: Task[]) => {
   const statusArray = ["Pending", "In Progress", "Completed"];
   const priorityArray = ["Low", "Medium", "High"];
-  const returnArray : dataSummaryType = [
+  const returnArray: DataSummaryType = [
     {
       status: statusArray,
       priority: priorityArray,
@@ -12,8 +12,8 @@ export const dataSummary = (arrayOfObjects: Task[]) => {
     0
   ]
   for (let i = 0; i < arrayOfObjects.length; i++) {
-    if (arrayOfObjects[i].taskId >= (returnArray[1])) {
-      returnArray[1] = arrayOfObjects[i].taskId + 1; // new IDs are assigned from returnArray[1]
+    if (arrayOfObjects[i].taskId > (returnArray[1])) { // should never be equal
+      returnArray[1] = arrayOfObjects[i].taskId; // new IDs are assigned from returnArray[1] + 1
     }
     if (!statusArray.includes(arrayOfObjects[i].status)) {
       statusArray.push(arrayOfObjects[i].status);
@@ -30,6 +30,15 @@ export const dataSummary = (arrayOfObjects: Task[]) => {
 export const getIndex = (unsortedArrayOfObjects: Task[], taskId: number) => {
   for (let i = 0; i < unsortedArrayOfObjects.length; i++) {
     if (unsortedArrayOfObjects[i].taskId === taskId) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+export const getIndexFilter = (unsortedArrayOfObjects: Filter[], filterId: number) => {
+  for (let i = 0; i < unsortedArrayOfObjects.length; i++) {
+    if (unsortedArrayOfObjects[i].filterId === filterId) {
       return i;
     }
   }
@@ -59,7 +68,7 @@ export const getIndexSortedArray = (sortedArrayOfObjects: Task[], taskId: number
 // console.log(getIndexSortedArray(tasklistData, 3)); // 2
 // console.log(getIndexSortedArray(tasklistData, 17)); // -1
 
-export const sortByKeyValue = (arrayOfObjects: Task[], key: string = 'id') => {
+export const sortByKeyValue = (arrayOfObjects: Task[], key: keyof Task) => {
   const deepCopy = [...arrayOfObjects]
   return deepCopy.sort((a, b) => {
     const stringA = (a as any)[key];
@@ -77,3 +86,11 @@ export const sortByKeyValue = (arrayOfObjects: Task[], key: string = 'id') => {
 // console.log(sortByKeyValue(tasklistData, 'dueDate'));
 // console.log('=========');
 // console.log(sortByKeyValue(tasklistData, 'priority'));
+
+export const capitalizeFirstLetters = (stringInput: string) => {
+  return stringInput.split(" ").map(element => element[0].toUpperCase() + element.slice(1)).join(" ");
+}
+
+// console.log(capitalizeFirstLetters("three"));
+// console.log(capitalizeFirstLetters("3"));
+// console.log(capitalizeFirstLetters("hamsters like pie"));

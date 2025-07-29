@@ -20,14 +20,14 @@
 import type { TaskItemProps } from '../../types/index.ts';
 import { Dropdown } from '../Inputs/Dropdown';
 
-export const TaskItem = ({ task, tasklistSummary, onDropdownChange, onDelete }: TaskItemProps) => {
+export const TaskItem = ({ task, tasklistSummary, onDropdownChange, onDeleteTask }: TaskItemProps) => {
   return (
     <div>
       <h2>{task.title}</h2>
       <div>{task.description}</div>
       <Dropdown task={task} tasklistSummary={tasklistSummary} name='priority' onDropdownChange={onDropdownChange} />
       <Dropdown task={task} tasklistSummary={tasklistSummary} name='status' onDropdownChange={onDropdownChange} />
-      <button onClick={() => onDelete(task.taskId)}>Delete</button>
+      <button onClick={() => onDeleteTask(task.taskId)}>Delete</button>
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import './App.css'
-import type { Task } from './types/index.ts';
+import type { Task, Filter } from './types/index.ts';
 import { tasklistData } from './data/tasklistData.ts';
-import { dataSummary, getIndex } from './utils/taskUtils.ts';
+import { dataSummary, getIndex, getIndexFilter, sortByKeyValue } from './utils/taskUtils.ts';
 import { TaskList } from './components/TaskList/TaskList';
 import { Dashboard } from './components/Dashboard/Dashboard';
 
 function App() {
 
- // const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
   // Remember to wipe comments.
   // 'Add a search bar to search for tasks' - this is essentially what, really?
   // Add task statistics.  validation helpers.  date formatting utilities.
@@ -51,8 +51,11 @@ function App() {
    */
 
   const [tasklist, setTasklist] = useState(tasklistData);
-  const tasklistSummary = dataSummary(tasklistData);
-  console.log(`App tasklistSummary ${JSON.stringify(tasklistSummary)}`)
+  const [filterlist, setFilterlist] = useState<Filter[]>([]);
+
+  const tasklistSummary = dataSummary(tasklistData); // contains data on status categories, priority categories, and last assigned index.
+  let filterLastIndex = filterlist.reduce((accumulator, currentValue) => (currentValue.filterId > accumulator) ? currentValue.filterId : accumulator, 0);
+  console.log(`App tasklistSummary ${JSON.stringify(tasklistSummary)}, filterLastIndex ${filterLastIndex}`)
 
   const handleDropdownChange = (taskId: number, keyValue: string, newValue: string) => {
     setTasklist(prev => {
@@ -70,15 +73,80 @@ function App() {
     }); // setTasklist
   }; // handleDropdownChange
 
-  const handleDelete = (taskId: number) => {
+  const handleDeleteTask = (taskId: number) => {
     const indexToDelete = getIndex(tasklist, taskId);
     setTasklist((prev) => (prev.slice(0, indexToDelete).concat(prev.slice(indexToDelete + 1))));
   }
 
+  const handleAddFilter = (filter: Filter) => {
+    setFilterlist(prev => [...prev, filter]);
+  }
+
+  const handleRemoveFilter = (filterId: number) => {
+    const indexToDelete = getIndexFilter(filterlist, filterId);
+    setFilterlist(prev => (prev.slice(0, indexToDelete).concat(prev.slice(indexToDelete + 1))));
+  }
+
+  const handleAddTask = (task: Task) => {
+    setTasklist(prev => [...prev, task]);
+  }
+
+  const handleSortTasksByArgument = (key: keyof Task) => {
+    setTasklist(prev => sortByKeyValue([...prev], key));
+  }
+
+  //   export type Filter = {
+  //   name: keyof Task,
+  //   value: string
+  // }
+
+  // utility function, feed in filters and tasklist, get back filtered tasklist.  Import this.
+  // Changes to task property, tasklist, filter all re-render core state, so a call on the utility
+  // function should work fine.  Sorting too.
+
+  /**
+   * 
+   * update task
+   * date formatting
+   * validation feedback
+   * add task statistics - number total, number of each priority, number of each status
+   * localstorage
+   * drag and drop
+   * toggle light and dark
+   * pass theme down to components that need it
+   * add animations/transitions for state changes
+   * 
+   * Dashboard:
+   * 
+   * tasklistSummary, filterLastIndex, handleAddTask, handleEditTask, handleAddFilter, handleDeleteFilter, handleSortTasksByArgument
+   * 
+   * Button sets local STATE to display form or not
+   * 
+   * Form requires button to submit.  This requires a handleSubmitForm function in App to be passed down as a prop.  Form takes a task or null . . . but union types are a bother.
+   * 
+   * Dashboard requires tasklistSummary to populate SortBy dynamically.  Use tasklistSummary[0].forEach was it?
+   * 
+   * Filter dropdown, if selected title, description, due date, generates label e.g. 'Description:' and input text/date box.
+   * If selected priority or status, use tasklistSummary to generate label e.g. 'Priority:' and dropdown.
+   *
+   * App must have an array of filter objects in STATE.  This looks like [{keyof Task: value: string}].
+   * When a filter is added in Dashboard, a list populates in the Dashboard, containing keyof and value information, and a button to remove the filter.  handleRemoveFilter and handleAddFilter.
+   * 
+   * 
+   * export interface Task {
+  taskId: number;
+  title: string;
+  description: string;
+  status: string;
+  priority: string;
+  dueDate: string;
+}
+   */
+
   return (
 
     <div>
-      <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDelete={handleDelete} />
+      <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} />
     </div>
 
   )

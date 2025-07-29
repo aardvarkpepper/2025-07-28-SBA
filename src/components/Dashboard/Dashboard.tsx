@@ -1,4 +1,5 @@
   import { useState } from 'react';
+  import { capitalizeFirstLetters } from '../../utils/taskUtils';
   
   //  * Navbar:  Add task button, sort by property pulldown
   //  * Add filters by pulldown, changes state of applied filters.  On selection, either a textbox appears, or a pulldown.
@@ -7,7 +8,7 @@
   // Note:  Styling counts for nothing.
 
 export const Dashboard = () => {
-  const [filterSelect, setFilterSelect] = useState();
+  const [showForm, setShowForm] = useState(false);
   return (
     <div>
       <div>

@@ -6,12 +6,10 @@ import { TaskItem } from './TaskItem';
 // onDropdownChange: (taskId: string, keyValue: keyof Task, newValue: string) => void;
 // onDelete: (taskId: number) => void;
 
-
-
-export const TaskList = ({ tasks, tasklistSummary, onDropdownChange, onDelete }: TaskListProps) => {
+export const TaskList = ({ tasks, tasklistSummary, onDropdownChange, onDeleteTask }: TaskListProps) => {
   return (
     <>
-      {tasks.map(task => <TaskItem key={task.taskId} task={task} tasklistSummary={tasklistSummary}onDropdownChange={onDropdownChange} onDelete={onDelete} />)}
+      {tasks.map(task => <TaskItem key={task.taskId} task={task} tasklistSummary={tasklistSummary}onDropdownChange={onDropdownChange} onDeleteTask={onDeleteTask} />)}
     </>
   )
 }

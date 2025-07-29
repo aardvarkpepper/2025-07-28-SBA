@@ -7,5 +7,6 @@ Your approach to component composition and state management
 
 ## Documentation
 
-Used some code I wrote from Lab 3.
+Used some utility functions and components I wrote from Lab 3.
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
