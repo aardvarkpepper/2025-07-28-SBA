@@ -39,6 +39,11 @@ export interface Task {
   dueDate: string;
 }
 
+export interface TaskFilterProps {
+  tasks: Task[];
+  onSortSelect: (sortSelected: keyof Task) => void;
+}
+
 export interface TaskFormProps {
   tasklistSummary: DataSummaryType;
   task: Task;

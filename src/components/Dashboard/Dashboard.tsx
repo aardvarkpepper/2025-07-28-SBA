@@ -1,6 +1,7 @@
   import { useState } from 'react';
   import type { DashboardProps, Task } from '../../types/index';
   import { capitalizeFirstLetters } from '../../utils/taskUtils';
+  import { TaskFilter } from '../TaskFilter/TaskFilter';
   import { TaskFormContainer } from '../TaskForm/TaskFormContainer';
   
   //  * Navbar:  Add task button, sort by property pulldown
@@ -15,10 +16,7 @@ export const Dashboard = ({tasklistSummary, tasks, onSortSelect}: DashboardProps
     <div>
       <div>
         <TaskFormContainer tasklistSummary={tasklistSummary} taskOrNull={null} />
-        <select onChange={(event) => onSortSelect(event.target.value as keyof Task)}>
-          {Object.keys(tasks[0])?.map(taskKey => <option key = {taskKey} value={taskKey}>{`Sort By: ${capitalizeFirstLetters(taskKey)}`}</option>)}
-        </select>
-        <div></div>
+        <TaskFilter tasks={tasks} onSortSelect={onSortSelect}/>
       </div>
       <div>
         <select>Add Filter By:  None</select>
