@@ -112,6 +112,11 @@ function App() {
     setTasklist((prev) => prev.map(taskElement => (taskElement.taskId === task.taskId) ? task : taskElement));
   }
 
+    /** GRADING CRITERIA
+   *  Robust form validation - could bounce on empty string.
+• Proper error handling - but there aren't any errors.
+• User-friendly feedback
+
   //   export type Filter = {
   //   name: keyof Task,
   //   value: string
@@ -169,9 +174,12 @@ function App() {
 }
    */
 
+const hamster=0;
+
   return (
 
     <div className='app dark'>
+      <div>{hamster && <p>{`test ${hamster}`}</p>}</div>
       <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
       <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} />
       <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />

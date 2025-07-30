@@ -40,6 +40,8 @@ export interface Task {
   dueDate: string;
 }
 
+export type TaskKeys = ['taskId', 'title', 'description', 'status', 'priority', 'dueDate'];
+
 export interface TaskFilterProps {
   tasks: Task[];
   onSortSelect: (sortSelected: keyof Task) => void;

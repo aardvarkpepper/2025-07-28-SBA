@@ -31,10 +31,10 @@ export const tasklistData: Task[] = [
     status: 'In Progress',
     priority: 'High',
     dueDate: '2026-12-29',
-  },
+  },  
   {
     taskId: 3,
-    title: 'Bravo Duplicate',
+    title: 'bali',
     description: 'Hotel',
     status: 'Pending',
     priority: 'Custom Priority',
@@ -74,4 +74,31 @@ export const filterlistData = [
     name: 'description',
     value: 'Mik',
   }
+]
+
+export const tasklistDataWithErrors: Task[] = [
+    {
+    taskId: 2,
+    title: 'ji',
+    description: 'hamster',
+    status: 'Pending',
+    priority: 'High',
+    dueDate: '2025-07-01',
+  },
+  {
+    taskId: 8,
+    title: '',
+    status: 'Pending',
+    priority: 'High',
+    dueDate: '2025-07-01',
+  },
+  {
+    taskId: 8,
+    title: 'Charlie',
+    description: {key: 'value'},
+    status: 'Pending',
+    priority: 'High',
+    dueDate: '2025-07-01',
+    hamster: 45,
+  },
 ]

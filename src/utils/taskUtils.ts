@@ -1,5 +1,5 @@
-import { tasklistData, filterlistData } from '../data/tasklistData.ts';
-import type { DataSummaryType, Filter, Task } from '../types/index';
+import { tasklistData, tasklistDataWithErrors, filterlistData } from '../data/tasklistData.ts';
+import type { DataSummaryType, Filter, Task, TaskKeys } from '../types/index';
 
 export const dataSummary = (arrayOfObjects: Task[]) => {
   const statusArray = ["Pending", "In Progress", "Completed"];
@@ -91,6 +91,56 @@ export const capitalizeFirstLetters = (stringInput: string) => {
   return stringInput.split(" ").map(element => element[0].toUpperCase() + element.slice(1)).join(" ");
 }
 
+export const getErrorArrayForStoredTasklist = (tasklist: Task[]) => {
+  const errorArray: string[] = [];
+  const arrayOfTaskKeys: TaskKeys = ['taskId', 'title', 'description', 'status', 'priority', 'dueDate'];
+  const setOfTaskKeys: Set<any> = new Set(arrayOfTaskKeys);
+  const mapOfValuesAndIndices: Map<any, any> = new Map(); // value, array of indices.
+  // Typescript types cannot be dynamically updated as types are defined at compile time, which does not intersect with runtime.  Some method of hard-coding is required.
+  for (let i = 0; i < tasklist.length; i++) {
+    const objKeys = Object.keys(tasklist[i]);
+    for (const eachKey of objKeys) {
+      if (eachKey === 'taskId' && !mapOfValuesAndIndices.has(tasklist[i][eachKey])) {
+        mapOfValuesAndIndices.set(tasklist[i][eachKey], [i])
+      } else if (eachKey === 'taskId' && mapOfValuesAndIndices.has(tasklist[i][eachKey])) {
+        mapOfValuesAndIndices.set(tasklist[i][eachKey], [...mapOfValuesAndIndices.get(tasklist[i][eachKey]), i])
+      }
+      if (!setOfTaskKeys.has(eachKey)) {
+        errorArray.push(`Data object at index ${i} has key ${eachKey}, but key must be 'taskId', 'title', 'description', 'status', 'priority', or 'dueDate'.`);
+      } else if (eachKey === 'taskId' && (typeof tasklist[i][eachKey] !== 'number')) {
+        errorArray.push(`Data object at index ${i} with key 'taskId' has value of type ${typeof tasklist[i][eachKey]} but must be value of type number.`);
+      }
+      if (eachKey !== 'taskId' && typeof (tasklist[i] as any)[eachKey] !== 'string') {
+        errorArray.push(`Data object at index ${i} with key '${eachKey}' has value of type ${typeof (tasklist[i] as any)[eachKey]} but must be value of type string.`);
+      }
+      if ((tasklist[i] as any)[eachKey] === "") {
+        errorArray.push(`Data object at index ${i} with key '${eachKey}' has value of empty string, but empty strings are not allowed.`);
+      }
+    } // for eachKey of objKeys
+    if (objKeys.length !== 6) {
+      errorArray.push(`Data object has ${objKeys.length} key(s) (${objKeys}) but each data object must have 6 keys; 'taskId', 'title', 'description', 'status', 'priority', and 'dueDate`);
+    }
+  }
+  mapOfValuesAndIndices.forEach((value, key, map) => {
+    console.log('MOVAIP TESTING');
+    if (value.length > 1) {
+      errorArray.push(`taskId values must be unique.  taskId value '${key}' is used at indices ${value.join(" and ")}.`)
+    }
+  })
+  return errorArray;
+}
+
+console.log(getErrorArrayForStoredTasklist(tasklistDataWithErrors));
+
+
+// taskId: number;
+// title: string;
+// description: string;
+// status: string;
+// priority: string;
+// dueDate: string;
+
 // console.log(capitalizeFirstLetters("three"));
 // console.log(capitalizeFirstLetters("3"));
 // console.log(capitalizeFirstLetters("hamsters like pie"));
+
