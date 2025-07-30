@@ -2,6 +2,7 @@ export interface DashboardProps {
   tasklistSummary: DataSummaryType;
   tasks: Task[];
   onSortSelect: (sortSelected: keyof Task) => void;
+  onSubmitFormTask: (newTask: Task) => void;
 }
 
 export type DataSummaryType = [
@@ -48,11 +49,13 @@ export interface TaskFormProps {
   tasklistSummary: DataSummaryType;
   task: Task;
   newTask: boolean;
-  onSubmitShowForm: () => void;
+  onToggleShowForm: () => void;
+  onSubmitFormTask: (newTask: Task) => void;
 }
 export interface TaskFormContainerProps {
   tasklistSummary: DataSummaryType;
   taskOrNull: Task | null;
+  onSubmitFormTask: (newTask: Task) => void;
 }
 export interface TaskItemProps {
   task: Task;

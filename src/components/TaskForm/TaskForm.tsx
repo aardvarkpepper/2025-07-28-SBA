@@ -25,29 +25,39 @@ import type { TaskFormProps } from '../../types/index.ts';
 // I need tasklistSummary to get the . . . value of new ID
 // if there is no task, then . . . prepopulate?  Yes.
 
-export const TaskForm = ({ tasklistSummary, task, newTask, onSubmitShowForm }: TaskFormProps) => {
+// Add a close button.
+
+export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onSubmitFormTask}: TaskFormProps) => { // onSubmitFormTask has different functionality depending on where it's invoked from.
 
   const [formData, setFormData] = useState(task);
 
-  //console.log(`TaskForm newTask ${newTask}`);
-
   let buttonText = newTask ? "Submit Task" : "Edit Task";
 
-  const handleSubmit = (event: any) => {
-    console.log(event.target.value);
-    onSubmitShowForm();
+  const handleSubmitForm = (event: any) => {
+    event.preventDefault()
+    console.log(`TaskForm handleSubmitForm attempted.`);
+    
+    onSubmitFormTask(formData);
+    onToggleShowForm();
   }
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    setFormData(prev => ({...prev, [name]: value})) // must wrap ...prev, [name]: value in ().
+    // note partial date input may trigger validation error (?).
+  }
+
   return (
     <div>
       <div>
         TaskForm
       </div>
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <input type="text" />
-        <input type="text" />
-        <input type="text" />
-        <input type="text" />
-        <input type="date" />
+      <form onSubmit={(event) => handleSubmitForm(event)}>
+        <input type="text" name='title' value={formData.title} onChange={handleChange}/>
+        <input type="text" name='description' value={formData.description} onChange={handleChange}/>
+        <input type="text" name='status' value={formData.status} onChange={handleChange}/>
+        <input type="text" name='priority' value={formData.priority} onChange={handleChange}/>
+        <input type="date" name='dueDate' value={formData.dueDate} onChange={handleChange}/>
         <button type="submit">{buttonText}</button>
       </form>
     </div>
