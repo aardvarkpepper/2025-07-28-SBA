@@ -50,11 +50,11 @@ function App() {
 
   const tasklistSummary = dataSummary(tasklist); // contains data on status categories, priority categories, and last assigned index.
 
-  console.log(`App working with value tasklistSummary ${JSON.stringify(tasklistSummary)}`);
+  //console.log(`App working with value tasklistSummary ${JSON.stringify(tasklistSummary)}`);
   // Async nature may force evaluation first?  Use await?
 
   let filterLastIndex = filterlist.reduce((accumulator, currentValue) => (currentValue.filterId > accumulator) ? currentValue.filterId : accumulator, 0);
-  console.log(`App tasklistSummary ${JSON.stringify(tasklistSummary)}, filterLastIndex ${filterLastIndex}`)
+  //console.log(`App tasklistSummary ${JSON.stringify(tasklistSummary)}, filterLastIndex ${filterLastIndex}`)
 
   const handleDropdownChange = (taskId: number, keyValue: string, newValue: string) => {
     setTasklist(prev => {
@@ -88,7 +88,7 @@ function App() {
 
   const handleAddTask = (task: Task) => {
     console.log(`App attempt handleAddTask`);
-    setTasklist(prev => [...prev, task]);
+    setTasklist(prev => [task, ...prev]);
   }
 
   const handleSortTasksByArgument = (key: keyof Task) => {

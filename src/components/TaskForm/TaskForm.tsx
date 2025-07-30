@@ -31,11 +31,11 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
 
   const [formData, setFormData] = useState(task);
 
-  let buttonText = newTask ? "Submit Task" : "Edit Task";
+  let buttonText = newTask ? "Submit New Task" : "Edit Task";
 
   const handleSubmitForm = (event: any) => {
     event.preventDefault()
-    console.log(`TaskForm handleSubmitForm attempted.`);
+    //console.log(`TaskForm handleSubmitForm attempted.`);
     
     onSubmitFormTask(formData);
     onToggleShowForm();
@@ -50,14 +50,25 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
   return (
     <div>
       <div>
-        TaskForm
+        {buttonText}
       </div>
+      <button onClick={() => onToggleShowForm()}>X</button>
       <form onSubmit={(event) => handleSubmitForm(event)}>
-        <input type="text" name='title' value={formData.title} onChange={handleChange}/>
-        <input type="text" name='description' value={formData.description} onChange={handleChange}/>
-        <input type="text" name='status' value={formData.status} onChange={handleChange}/>
-        <input type="text" name='priority' value={formData.priority} onChange={handleChange}/>
-        <input type="date" name='dueDate' value={formData.dueDate} onChange={handleChange}/>
+        <label htmlFor='title'>Title:</label>
+        <input type="text" id='title' name='title' value={formData.title} onChange={handleChange}/>
+        <br />
+        <label htmlFor='description'>Description:</label>
+        <input type="text" id='description' name='description' value={formData.description} onChange={handleChange}/>
+        <br />
+        <label htmlFor='status'>Status:</label>
+        <input type="text" id='status' name='status' value={formData.status} onChange={handleChange}/>
+        <br />
+        <label htmlFor='priority'>Priority:</label>
+        <input type="text" id='priority' name='priority' value={formData.priority} onChange={handleChange}/>
+        <br />
+        <label htmlFor='dueDate'>Due Date:</label>
+        <input type="date" id='date' name='dueDate' value={formData.dueDate} onChange={handleChange}/>
+        <br />
         <button type="submit">{buttonText}</button>
       </form>
     </div>
