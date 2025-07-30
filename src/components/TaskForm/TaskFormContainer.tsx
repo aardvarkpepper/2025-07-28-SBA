@@ -40,18 +40,19 @@ export const TaskFormContainer = ({ tasklistSummary, taskOrNull, onSubmitFormTas
     buttonText = "Add Task";
     newTask = true;
   }
-  
+
   const [showForm, setShowForm] = useState(false);
- 
+
   const handleToggleShowForm = () => {
     setShowForm(prev => !prev);
   }
 
   return (
-    <>
-      <div className='taskformcontainer'>Taskform Container</div>
+
+    <div className='taskformcontainer'>
       {showForm ? null : <button onClick={() => handleToggleShowForm()}>{buttonText}</button>}
-      {showForm ? <TaskForm tasklistSummary={tasklistSummary} task={taskData} newTask={newTask} onToggleShowForm={handleToggleShowForm} onSubmitFormTask={onSubmitFormTask}/> : null}
-    </>
+      {showForm ? <TaskForm tasklistSummary={tasklistSummary} task={taskData} newTask={newTask} onToggleShowForm={handleToggleShowForm} onSubmitFormTask={onSubmitFormTask} /> : null}
+    </div>
+
   )
 }

@@ -24,6 +24,10 @@ select:hover {
   color: lightgray;
 }
 
+.errormessage {
+  color: red;
+}
+
 .taskitem:nth-child(even) {
   background-color: darkgreen;
   color: yellow;
