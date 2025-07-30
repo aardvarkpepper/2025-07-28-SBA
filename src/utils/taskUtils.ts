@@ -130,17 +130,9 @@ export const getErrorArrayForStoredTasklist = (tasklist: Task[]) => {
   return errorArray;
 }
 
-console.log(getErrorArrayForStoredTasklist(tasklistDataWithErrors));
+// check date; change from 'pending' to 'overdue'?  But do we want an overdue status?
+// pending, complete, in progress
+// low, medium, high
 
-
-// taskId: number;
-// title: string;
-// description: string;
-// status: string;
-// priority: string;
-// dueDate: string;
-
-// console.log(capitalizeFirstLetters("three"));
-// console.log(capitalizeFirstLetters("3"));
-// console.log(capitalizeFirstLetters("hamsters like pie"));
+// validation - current date, at least?  and check if empty strings?  ok.
 

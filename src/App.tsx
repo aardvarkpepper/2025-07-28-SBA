@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 import type { Task, Filter } from './types/index.ts';
-import { tasklistData } from './data/tasklistData.ts';
+import { tasklistData, tasklistDataWithErrors } from './data/tasklistData.ts';
 import { dataSummary, getIndex, getIndexFilter, sortByKeyValue } from './utils/taskUtils.ts';
 import { TaskList } from './components/TaskList/TaskList';
 import { Dashboard } from './components/Dashboard/Dashboard';
 
 function App() {
+  console.log(tasklistDataWithErrors);
 
   // const [count, setCount] = useState(0)
   // Remember to wipe comments.
