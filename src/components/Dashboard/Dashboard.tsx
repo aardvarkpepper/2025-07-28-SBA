@@ -10,12 +10,12 @@
   //  *  When form submit is pressed, form disappears, message appears "Form submitted successfully" or some such.
   // Note:  Styling counts for nothing.
 
-export const Dashboard = ({tasklistSummary, tasks, onSortSelect, onSubmitFormTask}: DashboardProps) => {
+export const Dashboard = ({tasklistSummary, tasks, onSortSelect, onAddFormTask}: DashboardProps) => {
 
   return (
     <div>
       <div>
-        <TaskFormContainer tasklistSummary={tasklistSummary} taskOrNull={null} onSubmitFormTask={onSubmitFormTask} />
+        <TaskFormContainer tasklistSummary={tasklistSummary} taskOrNull={null} onSubmitFormTask={onAddFormTask} />
         <TaskFilter tasks={tasks} onSortSelect={onSortSelect}/>
       </div>
       <div>

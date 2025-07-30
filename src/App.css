@@ -3,10 +3,18 @@ body {
   color: black;
 }
 
-.app {
+.dark {
   background-color: black;
-  color: white;
+  color: lightgray;
+}
+
+.app {
   width: 100vw;
+}
+
+.taskitem:nth-child(even) {
+  background-color: darkgreen;
+  color: yellow;
 }
 
 .hidden {

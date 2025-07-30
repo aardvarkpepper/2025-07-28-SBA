@@ -99,12 +99,17 @@ function App() {
   const handleToggleDarkMode = (event: any) => {
     setDarkmode(prev => {
       if (prev === 'Deactivate Darkmode') {
-        event.target.parentElement.className=''
-      } else {
         event.target.parentElement.className='app'
+      } else {
+        event.target.parentElement.className='app dark'
       }
       return (prev === 'Deactivate Darkmode' ? 'Activate Darkmode' : 'Deactivate Darkmode');
     });
+  }
+
+  const handleEditTask = (task: Task) => {
+    const indexToDelete = getIndex(tasklist, task.taskId);
+    setTasklist((prev) => prev.map(taskElement => (taskElement.taskId === task.taskId) ? task : taskElement));
   }
 
   //   export type Filter = {
@@ -162,10 +167,10 @@ function App() {
 
   return (
 
-    <div className='app'>
+    <div className='app dark'>
       <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
-      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onSubmitFormTask = {handleAddTask} />
-      <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} />
+      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} />
+      <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
     </div>
 
   )

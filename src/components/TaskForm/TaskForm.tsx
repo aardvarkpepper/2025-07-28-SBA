@@ -49,7 +49,7 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
 
   return (
     <div>
-      <div className='taskform'>
+      <div>
         {buttonText}
       </div>
       <button onClick={() => onToggleShowForm()}>X</button>

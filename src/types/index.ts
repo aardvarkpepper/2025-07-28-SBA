@@ -2,7 +2,7 @@ export interface DashboardProps {
   tasklistSummary: DataSummaryType;
   tasks: Task[];
   onSortSelect: (sortSelected: keyof Task) => void;
-  onSubmitFormTask: (newTask: Task) => void;
+  onAddFormTask: (newTask: Task) => void;
 }
 
 export type DataSummaryType = [
@@ -62,10 +62,12 @@ export interface TaskItemProps {
   tasklistSummary: DataSummaryType;
   onDropdownChange: (taskId: number, name: string, newValue: string) => void;
   onDeleteTask: (taskId: number) => void;
+  onEditTask: (task: Task) => void;
 }
 export interface TaskListProps {
   tasks: Task[];
   tasklistSummary: DataSummaryType;
   onDropdownChange: (taskId: number, name: string, newValue: string) => void;
   onDeleteTask: (taskId: number) => void;
+  onEditTask: (task: Task) => void;
 }
