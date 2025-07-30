@@ -3,13 +3,25 @@ body {
   color: black;
 }
 
-.dark {
-  background-color: black;
-  color: lightgray;
+button {
+  background-color: pink;
+}
+
+button:active {
+  background-color: aqua;
+}
+
+select:hover {
+  cursor: pointer;
 }
 
 .app {
   width: 100vw;
+}
+
+.dark {
+  background-color: black;
+  color: lightgray;
 }
 
 .taskitem:nth-child(even) {
@@ -17,10 +29,3 @@ body {
   color: yellow;
 }
 
-.hidden {
-  display: none
-}
-
-button {
-  background-color: pink;
-}

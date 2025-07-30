@@ -9,7 +9,7 @@ export const dataSummary = (arrayOfObjects: Task[]) => {
       status: statusArray,
       priority: priorityArray,
     },
-    0
+    0 // arrayOfObjects taskId max.
   ]
   for (let i = 0; i < arrayOfObjects.length; i++) {
     if (arrayOfObjects[i].taskId > (returnArray[1])) { // should never be equal

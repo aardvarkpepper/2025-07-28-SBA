@@ -121,9 +121,13 @@ function App() {
   // Changes to task property, tasklist, filter all re-render core state, so a call on the utility
   // function should work fine.  Sorting too.
 
-  /**
-   * 
-   * update task
+  /** GRADING CRITERIA
+   *  Robust form validation
+• Proper error handling
+• User-friendly feedback
+- proper error handling
+
+===
    * date formatting
    * validation feedback
    * add task statistics - number total, number of each priority, number of each status
