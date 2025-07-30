@@ -47,6 +47,7 @@ function App() {
 
   const [tasklist, setTasklist] = useState(tasklistData);
   const [filterlist, setFilterlist] = useState<Filter[]>([]);
+  const [darkmode, setDarkmode] = useState("Deactivate Darkmode");
 
   const tasklistSummary = dataSummary(tasklist); // contains data on status categories, priority categories, and last assigned index.
 
@@ -93,6 +94,17 @@ function App() {
 
   const handleSortTasksByArgument = (key: keyof Task) => {
     setTasklist(prev => sortByKeyValue([...prev], key));
+  }
+
+  const handleToggleDarkMode = (event: any) => {
+    setDarkmode(prev => {
+      if (prev === 'Deactivate Darkmode') {
+        event.target.parentElement.className=''
+      } else {
+        event.target.parentElement.className='app'
+      }
+      return (prev === 'Deactivate Darkmode' ? 'Activate Darkmode' : 'Deactivate Darkmode');
+    });
   }
 
   //   export type Filter = {
@@ -150,7 +162,8 @@ function App() {
 
   return (
 
-    <div>
+    <div className='app'>
+      <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
       <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onSubmitFormTask = {handleAddTask} />
       <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} />
     </div>

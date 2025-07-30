@@ -1,3 +1,14 @@
+body {
+  background-color: white;
+  color: black;
+}
+
+.app {
+  background-color: black;
+  color: white;
+  width: 100vw;
+}
+
 .hidden {
   display: none
 }
