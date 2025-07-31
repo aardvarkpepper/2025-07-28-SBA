@@ -38,7 +38,7 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
     event.preventDefault();
     const formValidationErrorArray = [];
     let errorMessage;
-    let formDataDeepCopy = {...formData};
+    let formDataDeepCopy = { ...formData };
     for (const each in formDataDeepCopy) {
       (formDataDeepCopy as any)[each] = String((formDataDeepCopy as any)[each]).trim();
       if ((formDataDeepCopy as any)[each] === "") {
@@ -66,10 +66,10 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
 
   return (
     <div>
-      <div>
-        {buttonText}
+      <div className='flexh'>
+        <h2>{buttonText}</h2>
+        <button onClick={() => onToggleShowForm()}>X</button>
       </div>
-      <button onClick={() => onToggleShowForm()}>X</button>
       <form onSubmit={(event) => handleSubmitForm(event)}>
         <label htmlFor='title'>Title:</label>
         <input type="text" id='title' name='title' value={formData.title} onChange={handleChange} />

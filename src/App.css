@@ -28,6 +28,10 @@ select:hover {
   color: red;
 }
 
+.flexh {
+  display: flex;
+}
+
 .taskitem:nth-child(even), .statscontainer {
   background-color: darkgreen;
   color: yellow;
