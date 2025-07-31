@@ -1,22 +1,3 @@
-// export interface Task {
-//   id: number;
-//   title: string;
-//   description: string;
-//   status: string;
-//   priority: string;
-//   dueDate: string;
-// }
-
-// export interface DropdownProps {
-//   onDropdownChange: (taskId: number, keyValue: keyof Task, newValue: string) => void
-// }
-
-// export interface TaskListProps {
-//   tasks: Task[];
-//   onDropdownChange: (taskId: number, name: keyof Task, newValue: string) => void;
-//   onDelete: (taskId: number) => void;
-// }
-
 import type { TaskItemProps } from '../../types/index.ts';
 import { Dropdown } from '../Inputs/Dropdown';
 import { TaskFormContainer } from '../TaskForm/TaskFormContainer';

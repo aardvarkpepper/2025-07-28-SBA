@@ -7,9 +7,3 @@ export const Dropdown = ({ task, tasklistSummary, name, onDropdownChange }: Drop
     </select>
   )
 }
-
-// export interface DropdownProps {
-//   taskId: number;
-//   name: keyof Task;
-//   onDropdownChange: (taskId: number, keyValue: keyof Task, newValue: string) => void
-// }

@@ -1,14 +1,6 @@
 import type { FilterProps } from "../../types";
 import { camelCaseToRegularCase, regularCaseToCamelCase } from '../../utils/taskUtils';
 
-
-
-// export type Filter = {
-//   filterId: number;
-//   name: keyof Task,
-//   value: string,
-// }
-
 export const Filter = ({ filter, onRemoveFilter }: FilterProps) => {
 
   const handleRemoveFilter = (event: any) => {

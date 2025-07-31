@@ -19,9 +19,7 @@ Used Typescript to define interfaces for React components.  Used React to pass s
 
 Instructions state to implement a jolly lot of features, but many (even most) of those features are not included in grading criteria.  Stuff like 'Add date formatting utilities' and 'Add task statstics' aren't a big deal to implement individually, but everything takes time.
 
-As it is, I maanaged time so I'll complete everything on the grading criteria.  I think between this and lab 3, I've demonstrated I'm able to handle stuff like date formatting and task statistics.  (Pass yyyy-mm-dd into Date object then slice / reformat as desired to format date; add things like tasklist.length and .length or equivalent of different keys.)
-
-The only tricky part is deciding how to handle filters.  For example, if a user wants to put in a filter that will return all tasks with 'cat' *or* 'dog' in the title where such tasks are also after a certain date, there needs to be some sort of 'or' handler added to the filter, which complicates how the user interface is designed.  But all of that is really a design issue, not a programming or logic issue.
+As it is, I managed time so everything explicitly in grading criteria is completed.
 
 3.  Your approach to component composition and state management
 

@@ -1,4 +1,3 @@
-import { tasklistData, tasklistDataWithErrors, filterlistData } from '../data/tasklistData.ts';
 import type { DataSummaryType, Filter, Task, TaskKeys } from '../types/index';
 
 export const dataSummary = (arrayOfObjects: Task[]) => {
@@ -25,8 +24,6 @@ export const dataSummary = (arrayOfObjects: Task[]) => {
   return returnArray;
 }
 
-//console.log(dataSummary(tasklistData));
-
 export const getIndex = (unsortedArrayOfObjects: Task[], taskId: number) => {
   for (let i = 0; i < unsortedArrayOfObjects.length; i++) {
     if (unsortedArrayOfObjects[i].taskId === taskId) {
@@ -50,7 +47,6 @@ export const getIndexSortedArray = (sortedArrayOfObjects: Task[], taskId: number
   let mid;
   while (first <= last) {
     mid = Math.floor((first + last) / 2);
-    //console.log(sortedArrayOfObjects);
     if (sortedArrayOfObjects[mid].taskId === taskId) {
       return mid;
     }
@@ -62,11 +58,6 @@ export const getIndexSortedArray = (sortedArrayOfObjects: Task[], taskId: number
   }
   return -1;
 }
-
-// console.log(getIndexSortedArray(tasklistData, 1)); // 0
-// console.log(getIndexSortedArray(tasklistData, 2)); // 1
-// console.log(getIndexSortedArray(tasklistData, 3)); // 2
-// console.log(getIndexSortedArray(tasklistData, 17)); // -1
 
 export const sortByKeyValue = (arrayOfObjects: Task[], key: keyof Task) => {
   const deepCopy = [...arrayOfObjects]
@@ -83,10 +74,6 @@ export const sortByKeyValue = (arrayOfObjects: Task[], key: keyof Task) => {
   });
 }
 
-// console.log(sortByKeyValue(tasklistData, 'dueDate'));
-// console.log('=========');
-// console.log(sortByKeyValue(tasklistData, 'priority'));
-
 export const capitalizeFirstLetters = (stringInput: string) => {
   return stringInput.split(" ").map(element => element[0].toUpperCase() + element.slice(1)).join(" ");
 }
@@ -95,7 +82,7 @@ export const getErrorArrayForStoredTasklist = (tasklist: Task[]) => {
   const errorArray: string[] = [];
   const arrayOfTaskKeys: TaskKeys = ['taskId', 'title', 'description', 'status', 'priority', 'dueDate'];
   const setOfTaskKeys: Set<any> = new Set(arrayOfTaskKeys);
-  const mapOfValuesAndIndices: Map<any, any> = new Map(); // value, array of indices.
+  const mapOfValuesAndIndices: Map<any, any> = new Map();
   // Typescript types cannot be dynamically updated as types are defined at compile time, which does not intersect with runtime.  Some method of hard-coding is required.
   for (let i = 0; i < tasklist.length; i++) {
     const objKeys = Object.keys(tasklist[i]);
@@ -122,7 +109,6 @@ export const getErrorArrayForStoredTasklist = (tasklist: Task[]) => {
     }
   }
   mapOfValuesAndIndices.forEach((value, key, map) => {
-    console.log('MOVAIP TESTING');
     if (value.length > 1) {
       errorArray.push(`taskId values must be unique.  taskId value '${key}' is used at indices ${value.join(" and ")}.`)
     }
@@ -142,7 +128,6 @@ export const aggregateTypesAndCounts = (arrayOfObjects: object[], key: string) =
       }
     }
   }
-  console.log(Object.entries(returnObject));
   return returnObject;
 }
 
@@ -202,20 +187,3 @@ export const applyFilters = (filters: any[], tasks: Task[]) => {
   }
   return returnArray;
 }
-
-console.log(applyFilters(filterlistData, tasklistData));
-
-// export type Filter = {
-//   filterId: number;
-//   name: keyof Task,
-//   value: string,
-// }
-
-// export interface Task {
-//   taskId: number;
-//   title: string;
-//   description: string;
-//   status: string;
-//   priority: string;
-//   dueDate: string;
-// }

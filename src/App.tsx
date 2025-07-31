@@ -1,64 +1,21 @@
 import { useState } from 'react'
 import './App.css'
 import type { Task, Filter } from './types/index.ts';
-import { tasklistData, tasklistDataWithErrors, filterlistData } from './data/tasklistData.ts';
+import { tasklistData, filterlistData } from './data/tasklistData.ts';
+import { tasklistDataWithErrors } from './data/tasklistDataWithErrors.ts';
+
 import { dataSummary, getIndex, getIndexFilter, sortByKeyValue, applyFilters } from './utils/taskUtils.ts';
 import { TaskList } from './components/TaskList/TaskList';
 import { Dashboard } from './components/Dashboard/Dashboard';
 
 function App() {
-  console.log(tasklistDataWithErrors);
-
-  // const [count, setCount] = useState(0)
-  // Remember to wipe comments.
-  // 'Add a search bar to search for tasks' - this is essentially what, really?
-  // Add task statistics.  validation helpers.  date formatting utilities.
-
-  /**
-
-   * Navbar:  Add task button, sort by property
-   * List filters, add filters, search function.
-   * (Search function iterates through array, looking to see if search term is "includes" in title or description).  Can do "split" to separate into array, and search for multiple strings.  Alternately can accept quotation marks for exact match including space e.g. 'bell bottom' will not find bell or bottom, but only 'bell bottom'
-   *  When form submit is pressed, form disappears, message appears "Form submitted successfully" or some such.
-   * 
-   * 
-   * 
-   * Pregen tasks.
-   * 
-   * Tasklist, Task.  Use the filters as mentioned.
-
-   * 
-   * When I set state of tasklist, look through status and priority and assign unique values to the object
-   * {status: Set, priority: Set} (just pop them in there), then use that object to populate dropdown. 
-   * 
-   * OPTIONALS
-   * Probably add something like a Set for keywords.  As many keywords (categories) as you like, then can filter on them.
-   * What about exclusive / inclusive filtering?  Ah . . . ugh.
-   * Just keep it simple.
-   * 
-   * id: number;
-     title: string;
-     description: string;
-     status: TaskStatus;
-     priority: PriorityStatus;
-     dueDate: string;
-
-
-   */
-
   const [tasklist, setTasklist] = useState(tasklistData);
   const [filterlist, setFilterlist] = useState(filterlistData);
   const [darkmode, setDarkmode] = useState("Deactivate Darkmode");
 
-  console.log(`App, testing for tasks ${JSON.stringify(applyFilters(tasklist, filterlist as any))}`);
-
   const tasklistSummary = dataSummary(tasklist); // contains data on status categories, priority categories, and last assigned index.
 
-  //console.log(`App working with value tasklistSummary ${JSON.stringify(tasklistSummary)}`);
-  // Async nature may force evaluation first?  Use await?
-
   let filterLastIndex = filterlist.reduce((accumulator, currentValue) => (currentValue.filterId > accumulator) ? currentValue.filterId : accumulator, 0);
-  //console.log(`App tasklistSummary ${JSON.stringify(tasklistSummary)}, filterLastIndex ${filterLastIndex}`)
 
   const handleDropdownChange = (taskId: number, keyValue: string, newValue: string) => {
     setTasklist(prev => {
@@ -91,7 +48,6 @@ function App() {
   }
 
   const handleAddTask = (task: Task) => {
-    console.log(`App attempt handleAddTask`);
     setTasklist(prev => [task, ...prev]);
   }
 
@@ -115,73 +71,12 @@ function App() {
     setTasklist((prev) => prev.map(taskElement => (taskElement.taskId === task.taskId) ? task : taskElement));
   }
 
-    /** GRADING CRITERIA
-   *  Robust form validation - could bounce on empty string.
-• Proper error handling - but there aren't any errors.
-• User-friendly feedback
-
-  //   export type Filter = {
-  //   name: keyof Task,
-  //   value: string
-  // }
-
-  // utility function, feed in filters and tasklist, get back filtered tasklist.  Import this.
-  // Changes to task property, tasklist, filter all re-render core state, so a call on the utility
-  // function should work fine.  Sorting too.
-
-
-Add task statistics
-
-===
-   * date formatting
-   * validation feedback
-   * add task statistics - number total, number of each priority, number of each status
-   * localstorage
-   * drag and drop
-   * toggle light and dark
-   * pass theme down to components that need it
-   * add animations/transitions for state changes
-   * 
-   * Dashboard:
-   * 
-   * tasklistSummary, filterLastIndex, handleAddTask, handleAddFilter, handleDeleteFilter, handleSortTasksByArgument
-   * 
-   * handleEditTask should go to TASKLIST/TASK
-   * 
-   * Above Taskform is a 
-   * TaskForm takes props:  task (or none), 
-   * 
-   * Button sets local STATE to display form or not
-   * 
-   * Form requires button to submit.  This requires a handleSubmitForm function in App to be passed down as a prop.  Form takes a task or null . . . but union types are a bother.
-   * 
-   * Dashboard requires tasklistSummary to populate SortBy dynamically.  Use tasklistSummary[0].forEach was it?
-   * 
-   * Filter dropdown, if selected title, description, due date, generates label e.g. 'Description:' and input text/date box.
-   * If selected priority or status, use tasklistSummary to generate label e.g. 'Priority:' and dropdown.
-   *
-   * App must have an array of filter objects in STATE.  This looks like [{keyof Task: value: string}].
-   * When a filter is added in Dashboard, a list populates in the Dashboard, containing keyof and value information, and a button to remove the filter.  handleRemoveFilter and handleAddFilter.
-   * 
-   * 
-   * export interface Task {
-  taskId: number;
-  title: string;
-  description: string;
-  status: string;
-  priority: string;
-  dueDate: string;
-}
-   */
-
   return (
-
     <div className='app dark'>
       <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
       <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} filters={filterlist as any}/>
       <TaskList tasks={applyFilters(filterlist, tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
     </div>
-
   )
 }
 

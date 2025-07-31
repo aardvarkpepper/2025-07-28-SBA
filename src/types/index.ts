@@ -48,7 +48,6 @@ export interface Task {
   priority: string;
   dueDate: string;
 }
-
 export interface StatsContainerProps {
   tasks: Task[];
 }

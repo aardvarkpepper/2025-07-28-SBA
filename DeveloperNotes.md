@@ -6,7 +6,9 @@ Particularly, test items using keyof if user ever has ability to add things that
 
 onSubmitFormTask uses submit new task in Dashboard/TaskFormContainer/Taskform, but uses edit task in TaskList/Task.
 
-String.trim is not used.  Users may find spaces useful when performing alphabetical sorts.
+'Add a search bar to search for tasks' - use .split and .includes or such to effectively filter tasks.  Instead, implemented dropdowns populated by dynamic data.
+
+Review SBA.
 
 ## Tests
 
