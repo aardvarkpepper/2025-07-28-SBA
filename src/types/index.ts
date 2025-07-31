@@ -40,6 +40,10 @@ export interface Task {
   dueDate: string;
 }
 
+export interface StatsContainerProps {
+  tasks: Task[];
+}
+
 export type TaskKeys = ['taskId', 'title', 'description', 'status', 'priority', 'dueDate'];
 
 export interface TaskFilterProps {

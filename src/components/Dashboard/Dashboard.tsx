@@ -3,6 +3,7 @@
   import { capitalizeFirstLetters } from '../../utils/taskUtils';
   import { TaskFilter } from '../TaskFilter/TaskFilter';
   import { TaskFormContainer } from '../TaskForm/TaskFormContainer';
+  import { StatsContainer } from './StatsContainer';
   
   //  * Navbar:  Add task button, sort by property pulldown
   //  * Add filters by pulldown, changes state of applied filters.  On selection, either a textbox appears, or a pulldown.
@@ -14,6 +15,9 @@ export const Dashboard = ({tasklistSummary, tasks, onSortSelect, onAddFormTask}:
 
   return (
     <div>
+      <div className='statscontainer'>
+        <StatsContainer tasks={tasks} />
+      </div>
       <div>
         <TaskFormContainer tasklistSummary={tasklistSummary} taskOrNull={null} onSubmitFormTask={onAddFormTask} />
         <TaskFilter tasks={tasks} onSortSelect={onSortSelect}/>

@@ -47,7 +47,7 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
     }
     try {
       if (formValidationErrorArray.length > 0) {
-        errorMessage = `Fields may not be empty.  Please enter a value for key(s) ${formValidationErrorArray.join(" and ")}.  Empty spaces at beginning and end are removed.`
+        errorMessage = `Fields may not be empty.  Please enter a value for key(s) ${formValidationErrorArray.join(" and ")}.  Empty spaces at beginning and end of entries are removed.`
         setFormErrorMessage(errorMessage);
         throw new Error(errorMessage);
       }

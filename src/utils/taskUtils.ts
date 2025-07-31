@@ -130,9 +130,21 @@ export const getErrorArrayForStoredTasklist = (tasklist: Task[]) => {
   return errorArray;
 }
 
-// check date; change from 'pending' to 'overdue'?  But do we want an overdue status?
-// pending, complete, in progress
-// low, medium, high
+export const aggregateTypesAndCounts = (arrayOfObjects: object[], key: string) => {
+  const returnObject = {};
+  for (const each of arrayOfObjects) {
+    const value = (each as any)[key];
+    if (value) { // this will not be an empty string or empty spaces due to validation.
+      if (!(returnObject as any)[value]) {
+        (returnObject as any)[value] = 1;
+      } else {
+        (returnObject as any)[value]++;
+      }
+    }
+  }
+  console.log(Object.entries(returnObject));
+  return returnObject;
+}
 
-// validation - current date, at least?  and check if empty strings?  ok.
+aggregateTypesAndCounts(tasklistData, 'priority');
 

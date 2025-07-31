@@ -28,8 +28,7 @@ select:hover {
   color: red;
 }
 
-.taskitem:nth-child(even) {
+.taskitem:nth-child(even), .statscontainer {
   background-color: darkgreen;
   color: yellow;
 }
-
