@@ -29,6 +29,11 @@ export type Filter = {
   value: string,
 }
 
+export interface FilterProps {
+  filter: Filter
+  onRemoveFilter: (filterId: number) => void;
+}
+
 export interface FilterContainerProps {
   tasks: Task[];
   filters: Filter[];

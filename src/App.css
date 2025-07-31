@@ -32,7 +32,7 @@ select:hover {
   display: flex;
 }
 
-.taskitem:nth-child(even), .statscontainer {
+.taskitem:nth-child(even), .statscontainer, .filter:nth-child(even) {
   background-color: darkgreen;
   color: yellow;
 }

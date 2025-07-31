@@ -186,3 +186,36 @@ export const regularCaseToCamelCase = (stringInput: string) => {
   snakeCaseWords.push(lastWord);
   return snakeCaseWords.join("");
 }
+
+export const applyFilters = (filters: any[], tasks: Task[]) => {
+  const returnArray = [];
+  for (const task of tasks) {
+    let pushMe = true;
+    for (const filter of filters) {
+      if ((task as any)[filter.name] !== filter.value) {
+        pushMe = false;
+      }
+    }
+    if (pushMe) {
+      returnArray.push(task);
+    }
+  }
+  return returnArray;
+}
+
+console.log(applyFilters(filterlistData, tasklistData));
+
+// export type Filter = {
+//   filterId: number;
+//   name: keyof Task,
+//   value: string,
+// }
+
+// export interface Task {
+//   taskId: number;
+//   title: string;
+//   description: string;
+//   status: string;
+//   priority: string;
+//   dueDate: string;
+// }

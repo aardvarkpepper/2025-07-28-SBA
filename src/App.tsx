@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import type { Task, Filter } from './types/index.ts';
-import { tasklistData, tasklistDataWithErrors } from './data/tasklistData.ts';
-import { dataSummary, getIndex, getIndexFilter, sortByKeyValue } from './utils/taskUtils.ts';
+import { tasklistData, tasklistDataWithErrors, filterlistData } from './data/tasklistData.ts';
+import { dataSummary, getIndex, getIndexFilter, sortByKeyValue, applyFilters } from './utils/taskUtils.ts';
 import { TaskList } from './components/TaskList/TaskList';
 import { Dashboard } from './components/Dashboard/Dashboard';
 
@@ -47,8 +47,10 @@ function App() {
    */
 
   const [tasklist, setTasklist] = useState(tasklistData);
-  const [filterlist, setFilterlist] = useState<Filter[]>([]);
+  const [filterlist, setFilterlist] = useState(filterlistData);
   const [darkmode, setDarkmode] = useState("Deactivate Darkmode");
+
+  console.log(`App, testing for tasks ${JSON.stringify(applyFilters(tasklist, filterlist as any))}`);
 
   const tasklistSummary = dataSummary(tasklist); // contains data on status categories, priority categories, and last assigned index.
 
@@ -84,7 +86,7 @@ function App() {
   }
 
   const handleRemoveFilter = (filterId: number) => {
-    const indexToDelete = getIndexFilter(filterlist, filterId);
+    const indexToDelete = getIndexFilter((filterlist as any), filterId);
     setFilterlist(prev => (prev.slice(0, indexToDelete).concat(prev.slice(indexToDelete + 1))));
   }
 
@@ -176,8 +178,8 @@ Add task statistics
 
     <div className='app dark'>
       <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
-      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} filters={filterlist}/>
-      <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
+      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} filters={filterlist as any}/>
+      <TaskList tasks={applyFilters(filterlist, tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
     </div>
 
   )

@@ -37,7 +37,7 @@ export const tasklistData: Task[] = [
     title: 'Look for new job sites to apply for a programming job.',
     description: 'Some jobs aren\'t advertised on traditional job sites so keep looking for new networks.',
     status: 'In Progress',
-    priority: 'Medium',
+    priority: 'Custom Priority',
     dueDate: '2026-12-29',
   },
   {
@@ -45,7 +45,7 @@ export const tasklistData: Task[] = [
     title: 'Apply to programming jobs',
     description: 'Apply, apply, then apply some more.  Can\'t get hired if not applying.',
     status: 'Pending',
-    priority: 'Custom Priority',
+    priority: 'High',
     dueDate: '2025-02-12',
   },
   {
@@ -77,11 +77,6 @@ export const filterlistData = [
     name: 'priority',
     value: 'High',
   },
-  {
-    filterId: 6,
-    name: 'description',
-    value: 'Mik',
-  }
 ]
 
 export const tasklistDataWithErrors: Task[] = [
