@@ -50,7 +50,7 @@ export const FilterContainer = ({ tasks, filters, onAddFilter, onRemoveFilter }:
         </select>
         <button onClick={() => handleAddFilter()}>Add Filter</button>
         <div>
-          <h2>Active Filters:</h2>
+          <h2>Active Filters: {filters.length}</h2>
           <div className='flexh'>
             {filters.map(filter => <Filter key={`filterId${filter.filterId}`} filter={filter} onRemoveFilter={onRemoveFilter}/>)}
           </div>

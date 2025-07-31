@@ -41,9 +41,10 @@ select:hover {
   color: red;
 }
 
-.filter {
+.filtercomponent {
   border: 1px solid darkorange;
   border-radius: 8px;
+  margin: 4px;
 }
 
 .flexh {
@@ -61,7 +62,7 @@ select:hover {
   border-radius: 16px;
 }
 
-.taskitem:nth-child(even), .statscontainer, .filter:nth-child(even) {
+.taskitem:nth-child(even), .statscontainer, .filtercomponent:nth-child(even) {
   background-color: darkgreen;
   color: yellow;
 }
