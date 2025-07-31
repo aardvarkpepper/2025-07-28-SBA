@@ -26,7 +26,7 @@ export interface DropdownProps {
 export type Filter = {
   filterId: number;
   name: keyof Task,
-  value: string,
+  value: any
 }
 
 export interface FilterProps {

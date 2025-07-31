@@ -1,3 +1,4 @@
+import { filterlistData, tasklistData } from '../data/tasklistData.ts';
 import type { DataSummaryType, Filter, Task, TaskKeys } from '../types/index';
 
 export const dataSummary = (arrayOfObjects: Task[]) => {
@@ -172,13 +173,18 @@ export const regularCaseToCamelCase = (stringInput: string) => {
   return snakeCaseWords.join("");
 }
 
-export const applyFilters = (filters: any[], tasks: Task[]) => {
+export const applyFilters = (filters: Filter[], tasks: Task[]) => {
   const returnArray = [];
   for (const task of tasks) {
     let pushMe = true;
     for (const filter of filters) {
-      if ((task as any)[filter.name] !== filter.value) {
+      if ((task as any)[regularCaseToCamelCase(filter.name)] != filter.value) {
+        console.log(`TASK: ${JSON.stringify(task)}, FILTER NAME: ${filter.name}`);
+        console.log(`COMPARE 1 ${(task as any)[regularCaseToCamelCase(filter.name)]}`);
+        console.log(`COMPARE 2 ${filter.value}`);
+        console.log(`eliminating ${task.taskId}`);
         pushMe = false;
+        break;
       }
     }
     if (pushMe) {

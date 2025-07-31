@@ -10,7 +10,7 @@ import { Dashboard } from './components/Dashboard/Dashboard';
 
 function App() {
   const [tasklist, setTasklist] = useState(tasklistData);
-  const [filterlist, setFilterlist] = useState(filterlistData);
+  const [filterlist, setFilterlist] = useState  (filterlistData);
   const [darkmode, setDarkmode] = useState("Deactivate Darkmode");
 
   const tasklistSummary = dataSummary(tasklist); // contains data on status categories, priority categories, and last assigned index.
@@ -39,7 +39,12 @@ function App() {
   }
 
   const handleAddFilter = (filter: Filter) => {
-    setFilterlist(prev => [...prev, filter]);
+    console.log(`App hAF trigger with ${JSON.stringify(filter)}`);
+    setFilterlist(prev=> {
+      //console.log(`original hAF ${JSON.stringify(prev)}`);
+      //console.log(`new hAF ${JSON.stringify([...prev, filter])}`);
+      return [...prev, filter]
+    });
   }
 
   const handleRemoveFilter = (filterId: number) => {
@@ -71,11 +76,14 @@ function App() {
     setTasklist((prev) => prev.map(taskElement => (taskElement.taskId === task.taskId) ? task : taskElement));
   }
 
+  //console.log(`Final: FILTERS: ${JSON.stringify(filterlist)}, TASKLIST: ${JSON.stringify(tasklist)} OUTPUT${applyFilters(filterlist, tasklist)}`);
+
   return (
     <div className='app dark'>
       <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
       <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} filters={filterlist as any}/>
-      <TaskList tasks={applyFilters(filterlist, tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
+      <script>console.log('ham', applyFilters(filterlist, tasklist))</script>
+      <TaskList tasks={applyFilters((filterlist as any), tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
     </div>
   )
 }

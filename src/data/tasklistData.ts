@@ -1,9 +1,10 @@
 import type { Task } from '../types/index';
+//note:  Generated data must not have multiple spaces in a row, as HTML trims those and causes equality issues.
 export const tasklistData: Task[] = [
   {
     taskId: 10,
     title: 'Add emoji selector to tasklist',
-    description: 'Add an emoji selector to the tasklist because hunting up unicode inputs is a bother.  🙄😹',
+    description: 'Add an emoji selector to the tasklist because hunting up unicode inputs is a bother. 🙄😹',
     status: 'Pending',
     priority: 'Low',
     dueDate: '2025-07-01',
@@ -11,7 +12,7 @@ export const tasklistData: Task[] = [
   {
     taskId: 8,
     title: 'Prep for chicken soup',
-    description: 'Chop carrots, onions, and celery.  Restock garlic, thyme, parsley, bay leaf if necessary.',
+    description: 'Chop carrots, onions, and celery. Restock garlic, thyme, parsley, bay leaf if necessary.',
     status: 'Pending',
     priority: 'High',
     dueDate: '2025-07-01',
@@ -43,7 +44,7 @@ export const tasklistData: Task[] = [
   {
     taskId: 3,
     title: 'Apply to programming jobs',
-    description: 'Apply, apply, then apply some more.  Can\'t get hired if not applying.',
+    description: 'Apply, apply, then apply some more. Can\'t get hired if not applying.',
     status: 'Pending',
     priority: 'High',
     dueDate: '2025-02-12',
@@ -51,7 +52,7 @@ export const tasklistData: Task[] = [
   {
     taskId: 2,
     title: 'Build networks',
-    description: 'Alternate between looking at professional networks and networks related to personal interests.  Personal connections may be less likely to result in jobs, but far more likely to result in jobs I\'m interested in.',
+    description: 'Alternate between looking at professional networks and networks related to personal interests. Personal connections may be less likely to result in jobs, but far more likely to result in jobs I\'m interested in.',
     status: 'In Progress',
     priority: 'Medium',
     dueDate: '2025-01-14',
@@ -59,7 +60,7 @@ export const tasklistData: Task[] = [
   {
     taskId: 1,
     title: 'Clean',
-    description: 'For whatever reason, people rarely put \'Dirty\' on their tasklist.  Unless they\'re doing something like weathering props for a movie, I suppose.  🤔',
+    description: 'For whatever reason, people rarely put \'Dirty\' on their tasklist. Unless they\'re doing something like weathering props for a movie, I suppose. 🤔',
     status: 'Completed',
     priority: 'High',
     dueDate: '2027-01-14',
@@ -79,29 +80,3 @@ export const filterlistData = [
   },
 ]
 
-export const tasklistDataWithErrors: Task[] = [
-  {
-    taskId: 2,
-    title: 'ji',
-    description: 'hamster',
-    status: 'Pending',
-    priority: 'High',
-    dueDate: '2025-07-01',
-  },
-  {
-    taskId: 8,
-    title: '',
-    status: 'Pending',
-    priority: 'High',
-    dueDate: '2025-07-01',
-  },
-  {
-    taskId: 8,
-    title: 'Charlie',
-    description: { key: 'value' },
-    status: 'Pending',
-    priority: 'High',
-    dueDate: '2025-07-01',
-    hamster: 45,
-  },
-]

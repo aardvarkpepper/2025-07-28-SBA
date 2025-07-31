@@ -35,7 +35,7 @@ export const FilterContainer = ({ tasks, filters, onAddFilter, onRemoveFilter }:
     onAddFilter({
       filterId: filterLastIndex + 1,
       name: (filterType as keyof Task),
-      value: filterValue
+      value: filterType === 'taskId' ? Number(filterValue) : filterValue
     })
   }
 
