@@ -146,7 +146,7 @@ export const aggregateTypesAndCounts = (arrayOfObjects: object[], key: string) =
   return returnObject;
 }
 
-export const snakeCaseToRegularCase = (stringInput: string) => {
+export const camelCaseToRegularCase = (stringInput: string) => {
   if (!stringInput.length) {
     return "";
   }
@@ -164,4 +164,25 @@ export const snakeCaseToRegularCase = (stringInput: string) => {
   const lastWord = newWordJoinThis.join("");
   regularCaseWords.push(lastWord);
   return regularCaseWords.join(" ");
+}
+
+export const regularCaseToCamelCase = (stringInput: string) => {
+    if (!stringInput.length) {
+    return "";
+  }
+  const snakeCaseWords: string[] = [];
+  let newWordJoinThis: string[] = [stringInput[0].toLowerCase()];
+  for (let i = 1; i < stringInput.length; i++) {
+    if (stringInput[i] === " ") continue;
+    if (stringInput[i] === stringInput[i].toUpperCase()) {
+      const newWord = newWordJoinThis.join("");
+      snakeCaseWords.push(newWord);
+      newWordJoinThis = [stringInput[i]];
+    } else {
+      newWordJoinThis.push(stringInput[i]);
+    }
+  }
+  const lastWord = newWordJoinThis.join("");
+  snakeCaseWords.push(lastWord);
+  return snakeCaseWords.join("");
 }
