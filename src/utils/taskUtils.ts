@@ -146,5 +146,22 @@ export const aggregateTypesAndCounts = (arrayOfObjects: object[], key: string) =
   return returnObject;
 }
 
-aggregateTypesAndCounts(tasklistData, 'priority');
-
+export const snakeCaseToRegularCase = (stringInput: string) => {
+  if (!stringInput.length) {
+    return "";
+  }
+  const regularCaseWords: string[] = [];
+  let newWordJoinThis: string[] = [stringInput[0].toUpperCase()];
+  for (let i = 1; i < stringInput.length; i++) {
+    if (stringInput[i] === stringInput[i].toUpperCase()) {
+      const newWord = newWordJoinThis.join("");
+      regularCaseWords.push(newWord);
+      newWordJoinThis = [stringInput[i]];
+    } else {
+      newWordJoinThis.push(stringInput[i]);
+    }
+  }
+  const lastWord = newWordJoinThis.join("");
+  regularCaseWords.push(lastWord);
+  return regularCaseWords.join(" ");
+}

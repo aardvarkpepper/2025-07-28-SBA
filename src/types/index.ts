@@ -1,6 +1,7 @@
 export interface DashboardProps {
   tasklistSummary: DataSummaryType;
   tasks: Task[];
+  filters: Filter[];
   onSortSelect: (sortSelected: keyof Task) => void;
   onAddFormTask: (newTask: Task) => void;
   onAddFilter: (filter: Filter) => void;
@@ -26,6 +27,13 @@ export type Filter = {
   filterId: number;
   name: keyof Task,
   value: string,
+}
+
+export interface FilterContainerProps {
+  tasks: Task[];
+  filters: Filter[];
+  onAddFilter: (filter: Filter) => void;
+  onRemoveFilter: (filterId: number) => void;
 }
 export interface Task {
   taskId: number;
