@@ -3,6 +3,8 @@ export interface DashboardProps {
   tasks: Task[];
   onSortSelect: (sortSelected: keyof Task) => void;
   onAddFormTask: (newTask: Task) => void;
+  onAddFilter: (filter: Filter) => void;
+  onRemoveFilter: (filterId: number) => void;
 }
 
 export type DataSummaryType = [
@@ -25,12 +27,6 @@ export type Filter = {
   name: keyof Task,
   value: string,
 }
-// export interface TaskFilterProps {
-//   onFilterChange: (filters: {
-//     status?: string; // task status
-//     priority?: string; // priority status
-//   }) => void;
-// }
 export interface Task {
   taskId: number;
   title: string;

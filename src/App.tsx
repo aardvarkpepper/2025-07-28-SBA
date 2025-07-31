@@ -127,11 +127,8 @@ function App() {
   // Changes to task property, tasklist, filter all re-render core state, so a call on the utility
   // function should work fine.  Sorting too.
 
-  /** GRADING CRITERIA
-   *  Robust form validation
-• Proper error handling
-• User-friendly feedback
-- proper error handling
+
+Add task statistics
 
 ===
    * date formatting
@@ -182,7 +179,7 @@ const hamster=0;
     <div className='app dark'>
       <div>{hamster && <p>{`test ${hamster}`}</p>}</div>
       <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
-      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} />
+      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} />
       <TaskList tasks={tasklist} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
     </div>
 
