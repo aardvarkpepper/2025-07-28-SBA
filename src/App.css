@@ -5,14 +5,23 @@ body {
 
 button {
   background-color: pink;
+  border: solid black 1px;
 }
 
 button:active {
   background-color: aqua;
 }
 
+input {
+  width: 300px;
+}
+
 select:hover {
   cursor: pointer;
+}
+
+.alignitemscenter {
+  align-items: center;
 }
 
 .app {
@@ -24,15 +33,51 @@ select:hover {
   color: lightgray;
 }
 
+.spacebetween {
+  justify-content: space-between;
+}
+
 .errormessage {
   color: red;
+}
+
+.filter {
+  border: 1px solid darkorange;
+  border-radius: 8px;
 }
 
 .flexh {
   display: flex;
 }
 
+.formcontainer {
+  text-align: right;
+}
+
+.taskcontainer, .filtercontainer, .statscontainer, .addsortcontainer{
+  padding: 8px;
+  margin: 8px;
+  border: 1px solid darkorange;
+  border-radius: 16px;
+}
+
 .taskitem:nth-child(even), .statscontainer, .filter:nth-child(even) {
   background-color: darkgreen;
   color: yellow;
+}
+
+.taskfilter {
+  height: 40px;
+}
+
+.taskitem {
+  border: 1px solid darkorange;
+  border-radius: 16px;
+  margin: 4px;
+}
+
+.taskitembar {
+  border: 1px solid lightyellow;
+  border-radius: 8px;
+  margin: 8px;
 }

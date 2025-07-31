@@ -41,28 +41,30 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
 
   return (
     <div>
-      <div className='flexh'>
+      <div className='flexh spacebetween'>
         <h2>{buttonText}</h2>
         <button onClick={() => onToggleShowForm()}>X</button>
       </div>
-      <form onSubmit={(event) => handleSubmitForm(event)}>
-        <label htmlFor='title'>Title:</label>
-        <input type="text" id='title' name='title' value={formData.title} onChange={handleChange} />
-        <br />
-        <label htmlFor='description'>Description:</label>
-        <input type="text" id='description' name='description' value={formData.description} onChange={handleChange} />
-        <br />
-        <label htmlFor='status'>Status:</label>
-        <input type="text" id='status' name='status' value={formData.status} onChange={handleChange} />
-        <br />
-        <label htmlFor='priority'>Priority:</label>
-        <input type="text" id='priority' name='priority' value={formData.priority} onChange={handleChange} />
-        <br />
-        <label htmlFor='dueDate'>Due Date:</label>
-        <input type="date" id='date' name='dueDate' value={formData.dueDate} onChange={handleChange} />
-        <br />
-        <button type="submit">{buttonText}</button>
-      </form>
+      <div className='formcontainer'>
+        <form onSubmit={(event) => handleSubmitForm(event)}>
+          <label htmlFor='title'>Title:</label>
+          <input type="text" id='title' name='title' value={formData.title} onChange={handleChange} />
+          <br />
+          <label htmlFor='description'>Description:</label>
+          <input type="text" id='description' name='description' value={formData.description} onChange={handleChange} />
+          <br />
+          <label htmlFor='status'>Status:</label>
+          <input type="text" id='status' name='status' value={formData.status} onChange={handleChange} />
+          <br />
+          <label htmlFor='priority'>Priority:</label>
+          <input type="text" id='priority' name='priority' value={formData.priority} onChange={handleChange} />
+          <br />
+          <label htmlFor='dueDate'>Due Date:</label>
+          <input type="date" id='date' name='dueDate' value={formData.dueDate} onChange={handleChange} />
+          <br />
+          <button type="submit">{buttonText}</button>
+        </form>
+      </div>
       <div className='errormessage'>
         {formErrorMessage}
       </div>

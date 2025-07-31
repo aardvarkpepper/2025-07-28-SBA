@@ -6,7 +6,7 @@ import { TaskFormContainer } from '../TaskForm/TaskFormContainer';
 import { StatsContainer } from './StatsContainer';
 import { FilterContainer } from '../Filters/FilterContainer';
 
-export const Dashboard = ({ tasklistSummary, tasks, onSortSelect, onAddFormTask, onAddFilter, onRemoveFilter, filters }: DashboardProps) => {
+export const Dashboard = ({ tasklistSummary, tasks, onAddFormTask, onAddFilter, onRemoveFilter, filters }: DashboardProps) => {
 
   return (
     <div>
@@ -14,12 +14,13 @@ export const Dashboard = ({ tasklistSummary, tasks, onSortSelect, onAddFormTask,
         <StatsContainer tasks={tasks} />
       </div>
       <div>
+        <FilterContainer tasks={tasks} filters={filters} onAddFilter={onAddFilter} onRemoveFilter={onRemoveFilter} />
+      </div>
+
+      <div className='addsortcontainer flexh'>
         <TaskFormContainer tasklistSummary={tasklistSummary} taskOrNull={null} onSubmitFormTask={onAddFormTask} />
-        <TaskFilter tasks={tasks} onSortSelect={onSortSelect} />
       </div>
-      <div>
-        <FilterContainer tasks={tasks} filters={filters} onAddFilter = {onAddFilter} onRemoveFilter = {onRemoveFilter} />
-      </div>
+
     </div>
   )
 }

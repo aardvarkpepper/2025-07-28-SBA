@@ -39,10 +39,7 @@ function App() {
   }
 
   const handleAddFilter = (filter: Filter) => {
-    console.log(`App hAF trigger with ${JSON.stringify(filter)}`);
     setFilterlist(prev=> {
-      //console.log(`original hAF ${JSON.stringify(prev)}`);
-      //console.log(`new hAF ${JSON.stringify([...prev, filter])}`);
       return [...prev, filter]
     });
   }
@@ -76,14 +73,11 @@ function App() {
     setTasklist((prev) => prev.map(taskElement => (taskElement.taskId === task.taskId) ? task : taskElement));
   }
 
-  //console.log(`Final: FILTERS: ${JSON.stringify(filterlist)}, TASKLIST: ${JSON.stringify(tasklist)} OUTPUT${applyFilters(filterlist, tasklist)}`);
-
   return (
     <div className='app dark'>
       <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
-      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onSortSelect={handleSortTasksByArgument} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} filters={filterlist as any}/>
-      <script>console.log('ham', applyFilters(filterlist, tasklist))</script>
-      <TaskList tasks={applyFilters((filterlist as any), tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} />
+      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} filters={filterlist as any}/>
+      <TaskList tasks={applyFilters((filterlist as any), tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} onSortSelect={handleSortTasksByArgument} />
     </div>
   )
 }

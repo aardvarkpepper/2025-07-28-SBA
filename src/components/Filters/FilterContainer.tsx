@@ -40,7 +40,7 @@ export const FilterContainer = ({ tasks, filters, onAddFilter, onRemoveFilter }:
   }
 
   return (
-    <div>
+    <div className='filtercontainer'>
       <div>Add Filter By:
         <select onChange={(event) => handleChangeFilterType(event)}>
           {tasks.length > 0 ? Object.keys(tasks[0]).map(keyOfTask => <option key={`filterkey-${keyOfTask}`}>{camelCaseToRegularCase(keyOfTask)}</option>) : null}
@@ -50,7 +50,7 @@ export const FilterContainer = ({ tasks, filters, onAddFilter, onRemoveFilter }:
         </select>
         <button onClick={() => handleAddFilter()}>Add Filter</button>
         <div>
-          Active Filters:
+          <h2>Active Filters:</h2>
           <div className='flexh'>
             {filters.map(filter => <Filter key={`filterId${filter.filterId}`} filter={filter} onRemoveFilter={onRemoveFilter}/>)}
           </div>

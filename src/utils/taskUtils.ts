@@ -179,10 +179,6 @@ export const applyFilters = (filters: Filter[], tasks: Task[]) => {
     let pushMe = true;
     for (const filter of filters) {
       if ((task as any)[regularCaseToCamelCase(filter.name)] != filter.value) {
-        console.log(`TASK: ${JSON.stringify(task)}, FILTER NAME: ${filter.name}`);
-        console.log(`COMPARE 1 ${(task as any)[regularCaseToCamelCase(filter.name)]}`);
-        console.log(`COMPARE 2 ${filter.value}`);
-        console.log(`eliminating ${task.taskId}`);
         pushMe = false;
         break;
       }
