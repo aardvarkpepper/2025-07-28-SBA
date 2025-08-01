@@ -1,25 +1,28 @@
 import { useState } from 'react'
 import './App.css'
-import type { Task, Filter } from './types/index.ts';
+import type { DataSummaryType, Task, Filter } from './types/index.ts';
 import { tasklistData, filterlistData } from './data/tasklistData.ts';
-import { tasklistDataWithErrors } from './data/tasklistDataWithErrors.ts';
+//for later use
+//import { tasklistDataWithErrors } from './data/tasklistDataWithErrors.ts';
 
 import { dataSummary, getIndex, getIndexFilter, sortByKeyValue, applyFilters } from './utils/taskUtils.ts';
 import { TaskList } from './components/TaskList/TaskList';
 import { Dashboard } from './components/Dashboard/Dashboard';
 
 function App() {
-  const [tasklist, setTasklist] = useState(tasklistData);
-  const [filterlist, setFilterlist] = useState  (filterlistData);
-  const [darkmode, setDarkmode] = useState("Deactivate Darkmode");
+  const [tasklist, setTasklist] = useState<Task[]>(tasklistData);
+  const [filterlist, setFilterlist] = useState<Filter[]>(filterlistData);
+  const [darkmode, setDarkmode] = useState<string>("Deactivate Darkmode");
 
-  const tasklistSummary = dataSummary(tasklist); // contains data on status categories, priority categories, and last assigned index.
 
-  let filterLastIndex = filterlist.reduce((accumulator, currentValue) => (currentValue.filterId > accumulator) ? currentValue.filterId : accumulator, 0);
+  const tasklistSummary: DataSummaryType = dataSummary(tasklist); // contains data on status categories, priority categories, and last assigned index.
+
+  //for later use.  In the meantime, this is run at the lowest level possible.
+  //let filterLastIndex = filterlist.reduce((accumulator, currentValue) => (currentValue.filterId > accumulator) ? currentValue.filterId : accumulator, 0);
 
   const handleDropdownChange = (taskId: number, keyValue: string, newValue: string) => {
     setTasklist(prev => {
-      const deepCopy = [];
+      const deepCopy: Task[] = [];
       for (const each of prev) {
         if (each.taskId !== taskId) {
           deepCopy.push(each);
@@ -39,7 +42,7 @@ function App() {
   }
 
   const handleAddFilter = (filter: Filter) => {
-    setFilterlist(prev=> {
+    setFilterlist(prev => {
       return [...prev, filter]
     });
   }
@@ -50,8 +53,17 @@ function App() {
   }
 
   const handleAddTask = (task: Task) => {
-    setTasklist(prev => [task, ...prev]);
-  }
+    setTasklist(prev => {
+
+      return [task, ...prev]
+    }); //setTasklist
+  } // handleAddTask
+
+  const handleEditTask = (task: Task) => {
+    setTasklist(prev => {
+      return prev.map(taskElement => (taskElement.taskId === task.taskId) ? task : taskElement)
+    }); //setTasklist
+  } // handleEditTask
 
   const handleSortTasksByArgument = (key: keyof Task) => {
     setTasklist(prev => sortByKeyValue([...prev], key));
@@ -60,24 +72,19 @@ function App() {
   const handleToggleDarkMode = (event: any) => {
     setDarkmode(prev => {
       if (prev === 'Deactivate Darkmode') {
-        event.target.parentElement.className='app'
+        event.target.parentElement.className = 'app'
       } else {
-        event.target.parentElement.className='app dark'
+        event.target.parentElement.className = 'app dark'
       }
       return (prev === 'Deactivate Darkmode' ? 'Activate Darkmode' : 'Deactivate Darkmode');
     });
   }
 
-  const handleEditTask = (task: Task) => {
-    const indexToDelete = getIndex(tasklist, task.taskId);
-    setTasklist((prev) => prev.map(taskElement => (taskElement.taskId === task.taskId) ? task : taskElement));
-  }
-
   return (
     <div className='app dark'>
-      <button onClick={(event) => handleToggleDarkMode(event)}>{darkmode}</button>
-      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onAddFormTask = {handleAddTask} onAddFilter = {handleAddFilter} onRemoveFilter = {handleRemoveFilter} filters={filterlist as any}/>
-      <TaskList tasks={applyFilters((filterlist as any), tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask = {handleEditTask} onSortSelect={handleSortTasksByArgument} />
+      <button onClick={(event: React.MouseEvent<HTMLButtonElement>) => handleToggleDarkMode(event)}>{darkmode}</button>
+      <Dashboard tasklistSummary={tasklistSummary} tasks={tasklist} onAddFormTask={handleAddTask} onAddFilter={handleAddFilter} onRemoveFilter={handleRemoveFilter} filters={filterlist as any} />
+      <TaskList tasks={applyFilters(filterlist, tasklist)} tasklistSummary={tasklistSummary} onDropdownChange={handleDropdownChange} onDeleteTask={handleDeleteTask} onEditTask={handleEditTask} onSortSelect={handleSortTasksByArgument} />
     </div>
   )
 }

@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import type { Task, TaskFormContainerProps } from '../../types/index.ts';
 import { TaskForm } from './TaskForm';
 
-export const TaskFormContainer = ({ tasklistSummary, taskOrNull, onSubmitFormTask }: TaskFormContainerProps) => {
+export const TaskFormContainer: React.FunctionComponent<TaskFormContainerProps> = ({ tasklistSummary, taskOrNull, onSubmitFormTask }: TaskFormContainerProps): React.ReactNode => {
 
   const todaysDate = new Date().toISOString().slice(0, 10);
-  const newTaskData = {
+  const newTaskData: Task = {
     taskId: tasklistSummary[1] + 1,
     title: "",
     description: "",
@@ -14,17 +14,17 @@ export const TaskFormContainer = ({ tasklistSummary, taskOrNull, onSubmitFormTas
     priority: "",
     dueDate: todaysDate,
   }
-  const taskData = taskOrNull ? taskOrNull : newTaskData;
-  let buttonText = "Edit Task";
-  let newTask = false;
+  const taskData: Task = taskOrNull ? taskOrNull : newTaskData;
+  let buttonText: string = "Edit Task";
+  let newTask: boolean = false;
 
   if (!taskOrNull) { // if no task was passed in
     buttonText = "Add Task";
     newTask = true;
   }
 
-  const [showForm, setShowForm] = useState(false);
-  const handleToggleShowForm = () => {
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const handleToggleShowForm: () => void = ():void => {
     setShowForm(prev => !prev);
   }
 

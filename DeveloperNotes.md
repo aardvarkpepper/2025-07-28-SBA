@@ -8,7 +8,7 @@ onSubmitFormTask uses submit new task in Dashboard/TaskFormContainer/Taskform, b
 
 'Add a search bar to search for tasks' - use .split and .includes or such to effectively filter tasks.  Instead, implemented dropdowns populated by dynamic data.
 
-Review SBA.
+Note:  When adding a new task, the currently selected filter dropdown does not repopulate.  That is, if filter by status is currently shown, and new task is added, the dropdown corresponding to status does not show the new status that was just entered.  But selecting a different filter by priority, say, updates all values.  Hm.  So when setting state on adding a task, then I call something that updates the filter fields as well, is all.  Edit as well.
 
 ## Tests
 

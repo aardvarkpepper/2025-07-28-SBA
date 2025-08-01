@@ -2,7 +2,7 @@ import type { TaskItemProps } from '../../types/index.ts';
 import { Dropdown } from '../Inputs/Dropdown';
 import { TaskFormContainer } from '../TaskForm/TaskFormContainer';
 
-export const TaskItem = ({ task, tasklistSummary, onDropdownChange, onDeleteTask, onEditTask }: TaskItemProps) => {
+export const TaskItem: React.FunctionComponent<TaskItemProps> = ({ task, tasklistSummary, onDropdownChange, onDeleteTask, onEditTask }: TaskItemProps): React.ReactNode => {
   return (
     <div className='taskitem'>
       <div className='flexh spacebetween alignitemscenter taskitembar'>

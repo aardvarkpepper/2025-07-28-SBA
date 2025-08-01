@@ -3,7 +3,7 @@ import type { TaskListProps } from '../../types/index.ts';
 import { TaskItem } from './TaskItem';
 import { TaskFilter } from '../TaskFilter/TaskFilter';
 
-export const TaskList = ({ tasks, tasklistSummary, onDropdownChange, onDeleteTask, onEditTask, onSortSelect }: TaskListProps) => {
+export const TaskList: React.FunctionComponent<TaskListProps> = ({ tasks, tasklistSummary, onDropdownChange, onDeleteTask, onEditTask, onSortSelect }: TaskListProps): React.ReactNode => {
   return (
     <div className = 'taskcontainer'>
       <div className='flexh spacebetween alignitemscenter'>

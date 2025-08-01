@@ -1,21 +1,28 @@
 import { useState } from 'react';
 
-import type { TaskFormProps } from '../../types/index.ts';
+import type { Task, TaskFormProps } from '../../types/index.ts';
 
-export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onSubmitFormTask }: TaskFormProps) => { // onSubmitFormTask has different functionality depending on where it's invoked from.
+export const TaskForm: React.FunctionComponent<TaskFormProps> = ({ task, newTask, onToggleShowForm, onSubmitFormTask }: TaskFormProps): React.ReactNode => { // onSubmitFormTask has different functionality depending on where it's invoked from.
 
-  const [formData, setFormData] = useState(task);
-  const [formErrorMessage, setFormErrorMessage] = useState("");
+  const [formData, setFormData] = useState<Task>(task);
+  const [formErrorMessage, setFormErrorMessage] = useState<string>("");
 
   let buttonText = newTask ? "Submit New Task" : "Edit Task";
 
-  const handleSubmitForm = (event: any) => {
+  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formValidationErrorArray = [];
-    let errorMessage;
-    let formDataDeepCopy = { ...formData };
+    const formValidationErrorArray: string[] = [];
+    let errorMessage: string = "";
+    let formDataDeepCopy: Task = { ...formData };
+    /**
+     * Though formDataDeepCopy is of type Task, iterating through using for const each in formDataDeepCopy is read as a string.  This is similar to an issue elsewhere where Object.keys was used; Typescript assumes the return is of string type.  However, a similar solution won't work here as each cannot be typed as keyof Task.
+     * Variations including creating a new variable and assigning each as in
+     * const hamster: keyof Task = each as keyof Task;
+     * encounters error Type 'string' is not assignable to type 'never'.ts(2322). Attempting to nest inside if(formDataDeepCopy does nothing.  After all, Typescript assigns 'never' to types that are never supposed to occur.)
+     * Attempting to use Object.keys encounters similar issues.
+     */
     for (const each in formDataDeepCopy) {
-      (formDataDeepCopy as any)[each] = String((formDataDeepCopy as any)[each]).trim();
+      (formDataDeepCopy as any) = String((formDataDeepCopy as any)[each]).trim();
       if ((formDataDeepCopy as any)[each] === "") {
         formValidationErrorArray.push(each);
       }
@@ -33,8 +40,8 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
     }
   }
 
-  const handleChange = (event: any) => {
-    const { name, value } = event.target;
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.currentTarget;
     setFormData(prev => ({ ...prev, [name]: value })) // must wrap ...prev, [name]: value in ().
     // note input type 'date' simply does not allow input error.
   }
@@ -46,9 +53,9 @@ export const TaskForm = ({ tasklistSummary, task, newTask, onToggleShowForm, onS
         <button onClick={() => onToggleShowForm()}>X</button>
       </div>
       <div className='formcontainer'>
-        <form onSubmit={(event) => handleSubmitForm(event)}>
+        <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => handleSubmitForm(event)}>
           <label htmlFor='title'>Title:</label>
-          <input type="text" id='title' name='title' value={formData.title} onChange={handleChange} />
+          <input type="text" id='title' name='title' value={formData.title} onChange={(event) => handleChange(event)} />
           <br />
           <label htmlFor='description'>Description:</label>
           <input type="text" id='description' name='description' value={formData.description} onChange={handleChange} />

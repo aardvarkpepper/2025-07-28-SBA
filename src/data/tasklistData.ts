@@ -1,4 +1,4 @@
-import type { Task } from '../types/index';
+import type { Task, Filter } from '../types/index';
 //note:  Generated data must not have multiple spaces in a row, as HTML trims those and causes equality issues.
 export const tasklistData: Task[] = [
   {
@@ -67,7 +67,7 @@ export const tasklistData: Task[] = [
   },
 ]
 
-export const filterlistData = [
+export const filterlistData: Filter[] = [
   {
     filterId: 1,
     name: 'status',

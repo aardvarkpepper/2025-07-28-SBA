@@ -1,12 +1,9 @@
-import { useState } from 'react';
-import type { DashboardProps, Task } from '../../types/index';
-import { capitalizeFirstLetters } from '../../utils/taskUtils';
-import { TaskFilter } from '../TaskFilter/TaskFilter';
+import type { DashboardProps } from '../../types/index';
 import { TaskFormContainer } from '../TaskForm/TaskFormContainer';
 import { StatsContainer } from './StatsContainer';
 import { FilterContainer } from '../Filters/FilterContainer';
 
-export const Dashboard = ({ tasklistSummary, tasks, onAddFormTask, onAddFilter, onRemoveFilter, filters }: DashboardProps) => {
+export const Dashboard: React.FunctionComponent<DashboardProps> = ({ tasklistSummary, tasks, onAddFormTask, onAddFilter, onRemoveFilter, filters }: DashboardProps): React.ReactNode => {
 
   return (
     <div>
@@ -20,7 +17,6 @@ export const Dashboard = ({ tasklistSummary, tasks, onAddFormTask, onAddFilter, 
       <div className='addsortcontainer flexh'>
         <TaskFormContainer tasklistSummary={tasklistSummary} taskOrNull={null} onSubmitFormTask={onAddFormTask} />
       </div>
-
     </div>
   )
 }
